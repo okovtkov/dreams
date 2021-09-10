@@ -1,0 +1,146 @@
+.text {
+  max-width: 425px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 24px;
+
+  span {
+    text-decoration: underline;
+  }
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.item {
+  padding: 21px;
+  border: 2px solid #5C5C5C;
+  border-radius: 6px;
+  margin-right: 12px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+
+  svg {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.variant {
+  margin-top: 10px;
+  width: 111px;
+}
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.textarea {
+  width: 100%;
+  padding: 19px;
+  color: white;
+  background-color: #3D3D3D;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+
+  @media screen and (min-width: 768px) {
+    width: auto;
+  }
+}
+
+.count {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  color: white;
+  font-weight: 600;
+  z-index: 22;
+}
+
+.textFieldWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.privacyPolicy {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 402px;
+  }
+
+  .text {
+    width: 100%;
+    margin: 0;
+    margin-left: 20px;
+    white-space: pre-wrap;
+
+    @media screen and (min-width: 768px) {
+      width: 266px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.checkbox {
+  width: 42px;
+  height: 33px;
+  background-color: #5c5c5c;
+  border-radius: 7px;
+
+  @media screen and (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
+
+  &_checked {
+    position: relative;
+    &::after {
+      position: absolute;
+      top: -2px;
+      left: 7px;
+      width: 25px;
+      height: 25px;
+      font-size: 25px;
+      content: '✔';
+
+      @media screen and (min-width: 768px) {
+        top: 3px;
+        left: 10px;
+      }
+    }
+  }
+}

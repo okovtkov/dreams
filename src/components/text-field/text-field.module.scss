@@ -1,0 +1,28 @@
+.container {
+  text-align: left;
+  width: 100%;
+  margin-bottom: 16px;
+
+  label {
+    display: inline-block;
+    color: #B9B9B9;
+    margin-bottom: 8px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 402px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.textField {
+  width: 100%;
+  padding: 14px;
+  background-color: #3D3D3D;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  color: white;
+  appearance: none;
+}
