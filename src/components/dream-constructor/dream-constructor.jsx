@@ -15,6 +15,7 @@ export default class DreamConstructor extends React.Component {
       text: '',
       name: '',
       email: '',
+      country: '',
     };
   }
 
@@ -58,6 +59,10 @@ export default class DreamConstructor extends React.Component {
     )
   }
 
+  onChangeCountry() {
+
+  }
+
   render() {
     return (
       <Window title={`Step ${this.state.step}/4`}>
@@ -81,6 +86,7 @@ export default class DreamConstructor extends React.Component {
             <DreamForm
               onChangeName={this.onChangeName.bind(this)}
               onChangeEmail={this.onChangeEmail.bind(this)}
+              onChangeCountry={this.onChangeCountry.bind(this)}
             />
           )}
         </form>
