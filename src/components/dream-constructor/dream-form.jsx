@@ -4,6 +4,7 @@ import Title from '../title/title';
 import TextField from '../text-field/text-field';
 import Button from '../button/button';
 import classNames from 'classnames';
+import Select from '../select/select';
 
 export default class DreamForm extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ export default class DreamForm extends React.Component {
           name="email"
           onChangeValue={this.props.onChangeEmail}
         />
+        <Select title="Country" name="country" onChangeValue={this.props.onChangeCountry} />
         <label className={css.privacyPolicy}>
           <div
             className={classNames(css.checkbox, {

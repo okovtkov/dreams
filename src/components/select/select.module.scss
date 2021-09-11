@@ -16,7 +16,7 @@
   }
 }
 
-.textField {
+.select {
   width: 100%;
   padding: 14px;
   background-color: #3D3D3D;
@@ -24,4 +24,8 @@
   border: none;
   outline: none;
   color: white;
+  appearance: none;
+  background-image: url('./arrow.png');
+  background-repeat: no-repeat;
+  background-position: top 50% right 14px;
 }
