@@ -1,19 +1,17 @@
 import React from 'react';
 import css from './button.module.scss';
 
-export default class Button extends React.Component {
-  onClick() {
-    if (this.props.onClick) {
-      this.props.onClick();
+export default function Button(props) {
+  const type = props.type || 'button';
+  const clickHandler = () => {
+    if (props.onClick) {
+      props.onClick();
     }
-  }
+  };
 
-  render() {
-    const type = this.props.type || 'button';
-    return (
-      <button type={type} className={css.button} onClick={this.onClick.bind(this)}>
-        {this.props.children}
-      </button>
-    );
-  }
+  return (
+    <button type={type} className={css.button} onClick={clickHandler}>
+      {props.children}
+    </button>
+  );
 }
