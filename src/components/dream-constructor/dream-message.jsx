@@ -23,6 +23,7 @@ export default function DreamMessage(props) {
     const text = event.target.value;
     if (text.length > 140) return;
     setText(text);
+    props.onClickChangeText(text);
   }
 
   return (
@@ -38,8 +39,7 @@ export default function DreamMessage(props) {
           placeholder="Write your dream here..."
           value={text}
           onChange={(event) => updateMessage(event)}
-        >
-        </textarea>
+        />
         <div className={css.count}>{text.length}/140</div>
       </div>
       <Button onClick={onClickNextStep}>Next step</Button>
