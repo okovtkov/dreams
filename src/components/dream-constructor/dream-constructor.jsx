@@ -12,7 +12,7 @@ export default function DreamConstructor() {
   const [text, setText] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('USA');
 
   function nextStep() {
     setStep(step + 1);
@@ -31,19 +31,6 @@ export default function DreamConstructor() {
     setSelectedCategories(categories);
   }
 
-  function onChangeText(text) {
-    setText(text);
-    nextStep();
-  }
-
-  function onChangeName(name) {
-    setName(name);
-  }
-
-  function onChangeEmail(email) {
-    setEmail(email);
-  }
-
   function onSubmit(event) {
     event.preventDefault();
     console.log(
@@ -54,10 +41,6 @@ export default function DreamConstructor() {
       email,
       country
     )
-  }
-
-  function onChangeCountry(country) {
-    setCountry(country);
   }
 
   return (
@@ -75,14 +58,15 @@ export default function DreamConstructor() {
         )}
         {step === 3 && (
           <DreamMessage
-            onClickNextStep={onChangeText}
+            onClickNextStep={nextStep}
+            onClickChangeText={(text) => setText(text)}
           />
         )}
         {step === 4 && (
           <DreamForm
-            onChangeName={onChangeName}
-            onChangeEmail={onChangeEmail}
-            onChangeCountry={onChangeCountry}
+            onChangeName={(name) => setName(name)}
+            onChangeEmail={(email) => setEmail(email)}
+            onChangeCountry={(country) => setCountry(country)}
           />
         )}
       </form>
