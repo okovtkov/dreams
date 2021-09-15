@@ -74,29 +74,27 @@ const categories = [
   }
 ]
 
-export default class DreamCategories extends React.Component {
-  render() {
-    return (
-      <ul className={css.list}>
-        {categories.map(category => (
-          <li
-            key={category.title}
-            className={classNames(css.item, {
-              [css.item_checked]: this.props.selectedCategories.includes(category)
-            })}
-          >
-            <label>
-              <Image src={category.image} alt={category.title} className={css.image} />
-              <input
-                type="checkbox"
-                checked={this.props.selectedCategories.includes(category)}
-                onChange={() => this.props.onToggleCategory(category)}
-                className={css.checkbox}
-              />
-            </label>
-          </li>
-        ))}
-      </ul>
-    );
-  }
+export default function DreamCategories(props) {
+  return (
+    <ul className={css.list}>
+      {categories.map(category => (
+        <li
+          key={category.title}
+          className={classNames(css.item, {
+            [css.item_checked]: props.selectedCategories.includes(category)
+          })}
+        >
+          <label>
+            <Image src={category.image} alt={category.title} className={css.image} />
+            <input
+              type="checkbox"
+              checked={props.selectedCategories.includes(category)}
+              onChange={() => props.onToggleCategory(category)}
+              className={css.checkbox}
+            />
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
 }
