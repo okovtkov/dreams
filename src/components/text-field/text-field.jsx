@@ -3,15 +3,15 @@ import css from './text-field.module.scss';
 
 export default function TextField(props) {
   return (
-    <div className={css.container}>
-      <label>{props.title}</label>
+    <label className={css.container}>
+      <span>{props.title}</span>
       <input
         type={props.type}
         className={css.textField}
         name={props.name}
         onChange={(event) => props.onChangeValue(event.target.value)}
-        required 
+        required
       />
-    </div>
+    </label>
   );
 }

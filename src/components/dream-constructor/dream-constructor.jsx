@@ -14,34 +14,35 @@ export default function DreamConstructor() {
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState('USA');
 
-  function nextStep() {
+  const nextStep = () => {
     setStep(step + 1);
-  }
+  };
 
-  function onChangeType(type) {
-    setType(type);
+  const onChangeType = (newType) => {
+    setType(newType);
     nextStep();
-  }
+  };
 
-  function toggleCategory(category) {
+  const toggleCategory = (category) => {
     const categories = selectedCategories.includes(category)
-      ? selectedCategories.filter(item => item !== category)
+      ? selectedCategories.filter((item) => item !== category)
       : [...selectedCategories, category];
     if (categories.length > 5) return;
     setSelectedCategories(categories);
-  }
+  };
 
-  function onSubmit(event) {
+  const onSubmit = (event) => {
     event.preventDefault();
+    // eslint-disable-next-line no-console
     console.log(
       selectedCategories,
       type,
       text,
       name,
       email,
-      country
-    )
-  }
+      country,
+    );
+  };
 
   return (
     <Window title={`Step ${step}/4`}>
@@ -59,14 +60,14 @@ export default function DreamConstructor() {
         {step === 3 && (
           <DreamMessage
             onClickNextStep={nextStep}
-            onClickChangeText={(text) => setText(text)}
+            onClickChangeText={setText}
           />
         )}
         {step === 4 && (
           <DreamForm
-            onChangeName={(name) => setName(name)}
-            onChangeEmail={(email) => setEmail(email)}
-            onChangeCountry={(country) => setCountry(country)}
+            onChangeName={setName}
+            onChangeEmail={setEmail}
+            onChangeCountry={setCountry}
           />
         )}
       </form>
