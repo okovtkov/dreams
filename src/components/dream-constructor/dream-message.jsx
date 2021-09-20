@@ -6,30 +6,33 @@ import Button from '../button/button';
 export default function DreamMessage(props) {
   const [text, setText] = useState('');
 
-  function validate() {
+  const validate = () => {
     if (text.length === 0) {
+      // eslint-disable-next-line no-alert
       alert('Please, write your dream');
       return false;
     }
     return true;
-  }
+  };
 
-  function onClickNextStep() {
+  const onClickNextStep = () => {
     const result = validate();
     if (result) props.onClickNextStep(text);
-  }
+  };
 
-  function updateMessage(event) {
-    const text = event.target.value;
-    if (text.length > 140) return;
-    setText(text);
-    props.onClickChangeText(text);
-  }
+  const updateMessage = (event) => {
+    const newText = event.target.value;
+    if (newText.length > 140) return;
+    setText(newText);
+    props.onClickChangeText(newText);
+  };
 
   return (
     <>
       <Title>Write your dream</Title>
-      <p className={css.text}>Write your 140 character dream! For example, start with “I dream of ...”</p>
+      <p className={css.text}>
+        Write your 140 character dream! For example, start with “I dream of ...”
+      </p>
       <div className={css.wrapper}>
         <textarea
           className={css.textarea}
@@ -40,7 +43,10 @@ export default function DreamMessage(props) {
           value={text}
           onChange={(event) => updateMessage(event)}
         />
-        <div className={css.count}>{text.length}/140</div>
+        <div className={css.count}>
+          {text.length}
+          /140
+        </div>
       </div>
       <Button onClick={onClickNextStep}>Next step</Button>
     </>

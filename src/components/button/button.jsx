@@ -10,6 +10,7 @@ export default function Button(props) {
   };
 
   return (
+    // eslint-disable-next-line react/button-has-type
     <button type={type} className={css.button} onClick={clickHandler}>
       {props.children}
     </button>

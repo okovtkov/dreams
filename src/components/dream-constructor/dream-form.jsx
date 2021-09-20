@@ -1,9 +1,9 @@
+import classNames from 'classnames';
 import React, { useState } from 'react';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import TextField from '../text-field/text-field';
 import Button from '../button/button';
-import classNames from 'classnames';
 import Select from '../select/select';
 
 export default function DreamForm(props) {
@@ -13,7 +13,7 @@ export default function DreamForm(props) {
     <>
       <Title>Some info about yourself</Title>
       <p className={css.text}>
-        Nisl, nisi, risus ut iaculis. Tristique porttitor dui, et, vitae eget ut tristique. 
+        Nisl, nisi, risus ut iaculis. Tristique porttitor dui, et, vitae eget ut tristique.
         Massa luctus nunc non velit nisi.
       </p>
       <TextField
@@ -32,11 +32,15 @@ export default function DreamForm(props) {
       <label className={css.privacyPolicy}>
         <div
           className={classNames(css.checkbox, {
-            [css.checkbox_checked]: agree
+            [css.checkbox_checked]: agree,
           })}
         />
         <p className={css.text}>
-          I have read and approve the <span>Terms and Conditions</span> and <span>Privacy policy</span>
+          I have read and approve the
+          {' '}
+          <span>Terms and Conditions</span>
+          {' and '}
+          <span>Privacy policy</span>
         </p>
         <input type="checkbox" required onChange={() => setAgree(!agree)} />
       </label>

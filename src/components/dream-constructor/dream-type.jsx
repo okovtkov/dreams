@@ -16,7 +16,7 @@ export default function DreamType(props) {
       <h3>SELECT DREAM TYPE</h3>
       <ul className={css.list}>
         <li className={css.item}>
-          <button className={css.button} onClick={() => props.onChangeType('video')} disabled>
+          <button type="button" className={css.button} onClick={() => props.onChangeType('video')} disabled>
             <IconVideo />
             <span className={css.variant}>
               Record a video dream
@@ -24,7 +24,7 @@ export default function DreamType(props) {
           </button>
         </li>
         <li className={css.item}>
-          <button className={css.button} onClick={() => props.onChangeType('text')}>
+          <button type="button" className={css.button} onClick={() => props.onChangeType('text')}>
             <IconMessage />
             <span className={css.variant}>
               Write a text dream

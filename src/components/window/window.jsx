@@ -7,7 +7,7 @@ export default function Window(props) {
       <section className={css.window}>
         <header className={css.header}>
           <span>{props.title}</span>
-          <button className={css.close}></button>
+          <button aria-label="закрыть" type="button" className={css.close} />
         </header>
         {props.children}
       </section>

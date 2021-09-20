@@ -5,19 +5,19 @@ import Title from '../title/title';
 import DreamCategories from '../dream-categories/dream-categories';
 
 export default function DreamCategory(props) {
-
   function validate() {
     if (props.selectedCategories.length === 0) {
+      // eslint-disable-next-line no-alert
       alert('Please, select your 1-5 categories');
       return false;
     }
     return true;
   }
 
-  function onClickNextStep() {
+  const onClickNextStep = () => {
     const result = validate();
     if (result) props.onClickNextStep();
-  }
+  };
 
   return (
     <>
@@ -30,7 +30,7 @@ export default function DreamCategory(props) {
         selectedCategories={props.selectedCategories}
         onToggleCategory={props.onToggleCategory}
       />
-      <Button onClick={onClickNextStep} >
+      <Button onClick={onClickNextStep}>
         Next step
       </Button>
     </>
