@@ -1,4 +1,8 @@
 .container {
+  display: none;
+}
+
+.container_open {
   position: absolute;
   top: 0;
   left: 0;
@@ -6,8 +10,8 @@
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  background-color: #2A2032C2;
   z-index: 1;
+  background-color: #2A2032C2;
 }
 
 .window {
@@ -39,10 +43,6 @@
   border-radius: 12px;
   background-color: #222;
   text-align: left;
-
-  span {
-    color: #AFAFAF;
-  }
 }
 
 .close {

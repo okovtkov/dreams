@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import css from './button.module.scss';
 
@@ -10,8 +11,15 @@ export default function Button(props) {
   };
 
   return (
-    // eslint-disable-next-line react/button-has-type
-    <button type={type} className={css.button} onClick={clickHandler}>
+    <button
+      // eslint-disable-next-line react/button-has-type
+      type={type}
+      onClick={clickHandler}
+      disabled={props.disabled}
+      className={classNames(props.className, css.button, {
+        [css.transparent]: props.transparent,
+      })}
+    >
       {props.children}
     </button>
   );

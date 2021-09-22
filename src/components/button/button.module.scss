@@ -15,8 +15,19 @@
   border: none;
   cursor: pointer;
 
+  &:disabled {
+    cursor: auto;
+    color: #777;
+  }
+
   @media screen and (min-width: 768px) {
     width: 338px;
     margin-bottom: 24px;
   }
+}
+
+.transparent {
+  font-weight: normal;
+  background: transparent;
+  border: 1px solid #5C5C5C;
 }
