@@ -10,13 +10,25 @@
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.7);
   border-radius: 7px;
   color: white;
+  font-size: inherit;
   font-family: inherit;
   font-weight: 600;
   border: none;
   cursor: pointer;
 
+  &:disabled {
+    cursor: auto;
+    color: #777;
+  }
+
   @media screen and (min-width: 768px) {
     width: 338px;
     margin-bottom: 24px;
   }
+}
+
+.transparent {
+  font-weight: normal;
+  background: transparent;
+  border: 1px solid #5C5C5C;
 }
