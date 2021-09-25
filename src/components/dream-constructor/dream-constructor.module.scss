@@ -20,15 +20,16 @@
   width: 49%;
   border: 2px solid #5C5C5C;
   border-radius: 6px;
-  margin-right: 12px;
+  margin-right: 6px;
 
   @media screen and (min-width: 375px) {
     width: auto;
-    padding: 10px;
+    padding: 13px;
   }
 
   @media screen and (min-width: 425px) {
     padding: 21px;
+    margin-right: 12px;
   }
 
   a {
@@ -167,19 +168,20 @@
 }
 
 .title {
+  padding: 0;
   color: #AFAFAF;
   background-color: transparent;
   border: none;
+  font-size: 18px;
 }
 
 .titleWithPrev {
   position: relative;
   margin-left: 20px;
-  color: #AFAFAF;
   cursor: pointer;
   &::before {
     position: absolute;
-    top: 1px;
+    top: 3px;
     left: -20px;
     height: 20px;
     width: 10px;
