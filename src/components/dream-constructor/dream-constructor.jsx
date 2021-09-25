@@ -13,6 +13,7 @@ export default function DreamConstructor() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [type, setType] = useState('');
+  const [video, setVideo] = useState(null);
   const [text, setText] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,6 +58,7 @@ export default function DreamConstructor() {
     console.log(
       selectedCategories,
       type,
+      video,
       text,
       name,
       email,
@@ -88,6 +90,7 @@ export default function DreamConstructor() {
           <VideoPlayer
             onClickNextStep={nextStep}
             onClickChangeText={setText}
+            onClickChangeVideo={setVideo}
           />
         )}
         {step === 4 && (

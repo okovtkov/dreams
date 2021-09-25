@@ -4,7 +4,6 @@ import React, {
   useState,
   useRef,
   useCallback,
-  useEffect,
 } from 'react';
 import css from './video-player.module.scss';
 import Title from '../title/title';
@@ -14,23 +13,36 @@ export default function VideoPlayer(props) {
   const [allowed, setAllowed] = useState(false);
   const [streaming, setStreaming] = useState(null);
   const [playerState, setPlayerState] = useState('stoped');
-  const [startedAt, setStartedAt] = useState(0);
-  const [link, setLink] = useState('');
+  const [link, setLink] = useState(null);
   const [seconds, setSeconds] = useState(0);
+  const [, setIntervalID] = useState(null);
+  const [, setTimeoutID] = useState(null);
   const videoRef = useRef();
 
   const onStop = (recordedChunks) => {
     const recorded = new Blob(recordedChunks, { type: 'video/webm' });
     setLink(URL.createObjectURL(recorded));
+    props.onClickChangeVideo(recorded);
   };
 
   const stop = useCallback(() => {
+    setIntervalID((interval) => clearInterval(interval));
+    setTimeoutID((timeout) => clearTimeout(timeout));
+
     streaming.getTracks().forEach((track) => track.stop());
-    setStreaming(null);
     setPlayerState('stoped');
   }, [streaming]);
 
-  const recording = useCallback(() => {
+  const timer = () => {
+    setSeconds((old) => old + 1);
+  };
+
+  const recording = () => {
+    if (playerState === 'recording') {
+      stop();
+      return;
+    }
+
     const recorder = new MediaRecorder(streaming);
     const data = [];
 
@@ -38,19 +50,13 @@ export default function VideoPlayer(props) {
     recorder.onstop = () => onStop(data);
     recorder.start();
     setPlayerState('recording');
-    setStartedAt(Date.now());
-  }, [streaming]);
-
-  useEffect(() => {
-    if (playerState === 'stoped') return;
-    const ticker = () => {
-      const time = Math.floor((Date.now() - startedAt) / 1000);
-      setSeconds(time);
-      if (playerState === 'recording' && time >= 30) stop();
-      else setTimeout(ticker, 1000);
-    };
-    ticker();
-  }, [stop, playerState, startedAt]);
+    const timeout = setTimeout(() => {
+      if (streaming) stop();
+    }, 30000);
+    const interval = setInterval(timer, 1000);
+    setIntervalID(interval);
+    setTimeoutID(timeout);
+  };
 
   const start = () => {
     navigator.mediaDevices
@@ -63,7 +69,7 @@ export default function VideoPlayer(props) {
   };
 
   const reset = () => {
-    setLink('');
+    setLink(null);
     setSeconds(0);
     start();
   };
@@ -84,26 +90,18 @@ export default function VideoPlayer(props) {
           autoPlay
           muted
         />
-        <div
-          className={classNames(css.timeline, {
-            [css.timeline_unactive]: streaming === null,
-          })}
-        >
-          <div className={css.lineWrapper}>
-            <div
-              className={css.line}
+        {!link && (
+          <div className={css.timeline}>
+            <div className={classNames(css.line, {
+              [css.line_playing]: playerState === 'recording',
+            })}
             />
-            <div
-              className={classNames(css.slider, {
-                [css.slider_active]: playerState === 'recording',
-              })}
-            />
+            <span className={css.time}>
+              {seconds}
+              /30
+            </span>
           </div>
-          <span className={css.time}>
-            {seconds}
-            /30
-          </span>
-        </div>
+        )}
         <video
           src={link}
           className={classNames(css.player, {
@@ -121,25 +119,24 @@ export default function VideoPlayer(props) {
           Allow camera access to start recording
         </button>
       </div>
-      <Button
-        transparent
-        disabled={!allowed}
-        onClick={playerState === 'recording' ? stop : recording}
-        className={classNames(css.recording, {
-          [css.recording_active]: playerState === 'recording',
-          [css.recording_hidden]: link,
-        })}
-      >
-        {playerState === 'recording' ? 'End recording' : 'Start recording'}
-      </Button>
-      <div
-        className={classNames(css.buttonsWrapper, {
-          [css.buttonsWrapper_hidden]: !link,
-        })}
-      >
-        <Button transparent onClick={() => reset()}>Record again</Button>
-        <Button onClick={props.onClickNextStep}>Next step</Button>
-      </div>
+      {!link && (
+        <Button
+          transparent
+          disabled={!allowed}
+          onClick={playerState === 'recording' ? stop : recording}
+          className={classNames(css.recording, {
+            [css.recording_active]: playerState === 'recording',
+          })}
+        >
+          {playerState === 'recording' ? 'End recording' : 'Start recording'}
+        </Button>
+      )}
+      {link && (
+        <div className={css.buttonsWrapper}>
+          <Button transparent onClick={reset}>Record again</Button>
+          <Button onClick={props.onClickNextStep}>Next step</Button>
+        </div>
+      )}
       <label className={css.upload}>
         Can’t record? Upload video instead
         <input type="file" className={css.input} />
