@@ -5,18 +5,18 @@ import Title from '../title/title';
 import DreamCategories from '../dream-categories/dream-categories';
 
 export default function DreamCategory(props) {
-  function validate() {
-    if (props.selectedCategories.length === 0) {
-      // eslint-disable-next-line no-alert
-      alert('Please, select your 1-5 categories');
-      return false;
-    }
-    return true;
-  }
+  const validate = () => {
+    if (props.selectedCategories.length === 0) throw new Error('Please, select your 1-5 categories');
+  };
 
   const onClickNextStep = () => {
-    const result = validate();
-    if (result) props.onClickNextStep();
+    try {
+      validate();
+      props.onClickNextStep();
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert(error.message);
+    }
   };
 
   return (
