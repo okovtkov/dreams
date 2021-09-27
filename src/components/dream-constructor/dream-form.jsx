@@ -20,15 +20,17 @@ export default function DreamForm(props) {
         title="Your full name"
         type="text"
         name="name"
+        required
         onChangeValue={props.onChangeName}
       />
       <TextField
         title="Your Email (not displayed)"
         type="email"
         name="email"
+        required
         onChangeValue={props.onChangeEmail}
       />
-      <Select title="Country" name="country" onChangeValue={props.onChangeCountry} />
+      <Select title="Country" name="country" required onChangeValue={props.onChangeCountry} />
       <label className={css.privacyPolicy}>
         <div
           className={classNames(css.checkbox, {

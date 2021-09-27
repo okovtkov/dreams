@@ -2,5 +2,9 @@
 *::after,
 *::before {
   box-sizing: border-box;
-  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+body {
+  background-color: #000;
+  font-family: 'IBM Plex Sans', sans-serif;
 }

@@ -5,7 +5,7 @@ import Window from '../window/window';
 import DreamType from './dream-type';
 import DreamCategory from './dream-category';
 import DreamMessage from './dream-message';
-import VideoPlayer from '../video-player/video-player';
+import DreamVideo from './dream-video';
 import DreamForm from './dream-form';
 import DreamFinished from './dream-finished';
 
@@ -39,6 +39,11 @@ export default function DreamConstructor() {
     setStep(step + 1);
   };
 
+  const onRecordVideo = (recorded) => {
+    setVideo(recorded);
+    nextStep();
+  };
+
   const onChangeType = (newType) => {
     setType(newType);
     nextStep();
@@ -68,7 +73,7 @@ export default function DreamConstructor() {
   };
 
   return (
-    <Window title={title()} open={open} onClose={() => setOpen(!open)}>
+    <Window title={title()} open={open} onClose={() => setOpen(false)}>
       <form action="#" name="form" onSubmit={onSubmit}>
         {step === 1 && (
           <DreamType onChangeType={onChangeType} />
@@ -87,10 +92,8 @@ export default function DreamConstructor() {
           />
         )}
         {step === 3 && type === 'video' && (
-          <VideoPlayer
-            onClickNextStep={nextStep}
-            onClickChangeText={setText}
-            onClickChangeVideo={setVideo}
+          <DreamVideo
+            onClickNextStep={onRecordVideo}
           />
         )}
         {step === 4 && (
@@ -100,7 +103,7 @@ export default function DreamConstructor() {
             onChangeCountry={setCountry}
           />
         )}
-        {step === 5 && <DreamFinished onClose={() => setOpen(!open)} />}
+        {step === 5 && <DreamFinished onClose={() => setOpen(false)} />}
       </form>
     </Window>
   );
