@@ -18,7 +18,7 @@ export default function DreamConstructor() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState('USA');
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const title = () => {
     const titleText = step > 4 ? 'Finished' : `Step ${step}/4`;

@@ -1,0 +1,34 @@
+import React from 'react';
+import css from './about.module.scss';
+import Positioner from '../positioner/positioner';
+import Button from '../button/button';
+import IconShare from '../svg-icon/icons/icon-share';
+import Planet from './planet.png';
+import PlanetMob from './planet_mobile.png';
+
+export default function About() {
+  return (
+    <Positioner className={css.wrapper}>
+      <h1 className={css.title}>What does the world dream of?</h1>
+      <picture className={css.image}>
+        <source srcSet={Planet.src} media="(min-width: 540px)" className={css.source} />
+        <img
+          src={PlanetMob.src}
+          alt="планета"
+          height={PlanetMob.height}
+          width={PlanetMob.width}
+          className={css.img}
+        />
+      </picture>
+      <p className={css.text}>
+        Deploy offline this discussion for product launch the right info at the right time to the
+        right people. Cloud strategy killing it we need distributors to evangelize the new line to
+        local markets, for exposing new.
+      </p>
+      <Button className={css.button}>
+        <span>Share your dream</span>
+        <IconShare />
+      </Button>
+    </Positioner>
+  );
+}
