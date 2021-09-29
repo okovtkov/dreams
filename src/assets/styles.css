@@ -9,7 +9,6 @@ body {
   background: linear-gradient(45deg, #000 40%, rgb(23, 60, 109) 100%);
   background-repeat: no-repeat;
   font-family: 'IBM Plex Sans', sans-serif;
-  overflow-x: hidden;
 }
 
 img {
