@@ -1,8 +1,16 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './window.module.scss';
 
 export default function Window(props) {
+  useEffect(() => {
+    if (props.open) document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [props.open]);
+
   return (
     <div
       className={classNames(css.container, {

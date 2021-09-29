@@ -9,7 +9,7 @@ import DreamVideo from './dream-video';
 import DreamForm from './dream-form';
 import DreamFinished from './dream-finished';
 
-export default function DreamConstructor() {
+export default function DreamConstructor(props) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [type, setType] = useState('');
@@ -18,7 +18,6 @@ export default function DreamConstructor() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState('USA');
-  const [open, setOpen] = useState(false);
 
   const title = () => {
     const titleText = step > 4 ? 'Finished' : `Step ${step}/4`;
@@ -73,7 +72,7 @@ export default function DreamConstructor() {
   };
 
   return (
-    <Window title={title()} open={open} onClose={() => setOpen(false)}>
+    <Window title={title()} open={props.open} onClose={props.onClose}>
       <form action="#" name="form" onSubmit={onSubmit}>
         {step === 1 && (
           <DreamType onChangeType={onChangeType} />
@@ -103,7 +102,7 @@ export default function DreamConstructor() {
             onChangeCountry={setCountry}
           />
         )}
-        {step === 5 && <DreamFinished onClose={() => setOpen(false)} />}
+        {step === 5 && <DreamFinished onClose={props.onClose} />}
       </form>
     </Window>
   );
