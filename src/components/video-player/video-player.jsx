@@ -64,43 +64,45 @@ export default function VideoPlayer(props) {
   };
 
   return (
-    <div className={css.videoContainer}>
-      <video
-        ref={videoRef}
-        className={classNames(css.video, {
-          [css.video_unactive]: props.video,
-        })}
-        autoPlay
-        muted
-      />
-      {!props.video && (
-        <div className={css.timeline}>
-          <div className={classNames(css.line, {
-            [css.line_playing]: playerState === 'recording',
+    <>
+      <div className={css.videoContainer}>
+        <video
+          ref={videoRef}
+          className={classNames(css.video, {
+            [css.video_unactive]: props.video,
           })}
-          />
-          <span className={css.time}>
-            {seconds}
-            /30
-          </span>
-        </div>
-      )}
-      <video
-        src={props.video ? URL.createObjectURL(props.video) : null}
-        className={classNames(css.player, {
-          [css.player_active]: props.video,
-        })}
-        controls
-      />
-      <button
-        type="button"
-        onClick={start}
-        className={classNames(css.allow, {
-          [css.allowed]: allowed,
-        })}
-      >
-        Allow camera access to start recording
-      </button>
+          autoPlay
+          muted
+        />
+        {!props.video && (
+          <div className={css.timeline}>
+            <div className={classNames(css.line, {
+              [css.line_playing]: playerState === 'recording',
+            })}
+            />
+            <span className={css.time}>
+              {seconds}
+              /30
+            </span>
+          </div>
+        )}
+        <video
+          src={props.video ? URL.createObjectURL(props.video) : null}
+          className={classNames(css.player, {
+            [css.player_active]: props.video,
+          })}
+          controls
+        />
+        <button
+          type="button"
+          onClick={start}
+          className={classNames(css.allow, {
+            [css.allowed]: allowed,
+          })}
+        >
+          Allow camera access to start recording
+        </button>
+      </div>
       {!props.video && (
         <Button
           transparent
@@ -119,6 +121,6 @@ export default function VideoPlayer(props) {
           {props.children}
         </div>
       )}
-    </div>
+    </>
   );
 }
