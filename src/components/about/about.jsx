@@ -11,7 +11,7 @@ export default function About() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Positioner className={css.wrapper}>
+    <Positioner className={css.wrapper} id="about">
       <h1 className={css.title}>What does the world dream of?</h1>
       <picture className={css.image}>
         <source srcSet={Planet.src} media="(min-width: 540px)" className={css.source} />

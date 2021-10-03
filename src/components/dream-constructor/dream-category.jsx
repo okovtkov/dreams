@@ -2,7 +2,7 @@ import React from 'react';
 import css from './dream-constructor.module.scss';
 import Button from '../button/button';
 import Title from '../title/title';
-import DreamCategories from '../dream-categories/dream-categories';
+import DreamCategories, { categories } from '../dream-categories/dream-categories';
 
 export default function DreamCategory(props) {
   const validate = () => {
@@ -29,6 +29,9 @@ export default function DreamCategory(props) {
       <DreamCategories
         selectedCategories={props.selectedCategories}
         onToggleCategory={props.onToggleCategory}
+        mode="large"
+        canSelect
+        categories={categories}
       />
       <Button onClick={onClickNextStep}>
         Next step

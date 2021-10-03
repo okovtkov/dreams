@@ -24,7 +24,7 @@ export default function DreamMessage(props) {
     const newText = event.target.value;
     if (newText.length > 140) return;
     setText(newText);
-    props.onClickChangeText(newText);
+    props.onChangeText(newText);
   };
 
   return (
