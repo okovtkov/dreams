@@ -25,7 +25,7 @@
 
 .timeline {
   position: absolute;
-  bottom: 100px;
+  bottom: 20px;
   left: 10px;
   display: flex;
   align-items: center;
@@ -135,7 +135,6 @@
 }
 
 .recording:disabled {
-  z-index: -1;
   &::before {
     background-color: #424242;
   }
@@ -158,7 +157,6 @@
   margin-right: auto;
   margin-bottom: 16px;
   margin-top: 23px;
-  outline: 1px solid red;
 
   button {
     margin: 0;
