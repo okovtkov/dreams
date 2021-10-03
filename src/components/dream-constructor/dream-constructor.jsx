@@ -87,7 +87,7 @@ export default function DreamConstructor(props) {
         {step === 3 && type === 'text' && (
           <DreamMessage
             onClickNextStep={nextStep}
-            onClickChangeText={setText}
+            onChangeText={setText}
           />
         )}
         {step === 3 && type === 'video' && (
