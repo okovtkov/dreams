@@ -25,5 +25,6 @@ rules: {
   jsx-a11y/label-has-associated-control: ['error', {
     assert: 'either'
   }],
-  react/prop-types: 'off'
+  react/prop-types: 'off',
+  react/require-default-props: 'off'
 }

@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import TextField from '../text-field/text-field';
 import Button from '../button/button';
 import Select from '../select/select';
 
-export default function DreamForm(props) {
+function DreamForm(props) {
   const [agree, setAgree] = useState(false);
 
   return (
@@ -52,3 +53,11 @@ export default function DreamForm(props) {
     </>
   );
 }
+
+DreamForm.propTypes = {
+  onChangeName: PropTypes.func.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onChangeCountry: PropTypes.func.isRequired,
+};
+
+export default DreamForm;

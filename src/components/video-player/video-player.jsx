@@ -2,10 +2,11 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import classNames from 'classnames';
 import React, { useState, useCallback, useRef } from 'react';
+import PropTypes from 'prop-types';
 import css from './video-player.module.scss';
 import Button from '../button/button';
 
-export default function VideoPlayer(props) {
+function VideoPlayer(props) {
   const videoRef = useRef();
   const [allowed, setAllowed] = useState(false);
   const [playerState, setPlayerState] = useState('stoped');
@@ -124,3 +125,13 @@ export default function VideoPlayer(props) {
     </>
   );
 }
+
+VideoPlayer.propTypes = {
+  onStop: PropTypes.func,
+  setVideo: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  video: PropTypes.object,
+  children: PropTypes.element,
+};
+
+export default VideoPlayer;

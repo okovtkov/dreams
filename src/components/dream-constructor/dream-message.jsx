@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import Button from '../button/button';
 
-export default function DreamMessage(props) {
+function DreamMessage(props) {
   const [text, setText] = useState('');
 
   const validate = () => {
@@ -16,8 +17,13 @@ export default function DreamMessage(props) {
   };
 
   const onClickNextStep = () => {
-    const result = validate();
-    if (result) props.onClickNextStep(text);
+    try {
+      validate();
+      props.onClickNextStep(text);
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert(error.message);
+    }
   };
 
   const updateMessage = (event) => {
@@ -52,3 +58,10 @@ export default function DreamMessage(props) {
     </>
   );
 }
+
+DreamMessage.propTypes = {
+  onClickNextStep: PropTypes.func.isRequired,
+  onChangeText: PropTypes.func.isRequired,
+};
+
+export default DreamMessage;

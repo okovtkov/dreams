@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import css from './dream-constructor.module.scss';
 import Button from '../button/button';
 import Title from '../title/title';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
 
-export default function DreamCategory(props) {
+function DreamCategory(props) {
   const validate = () => {
     if (props.selectedCategories.length === 0) throw new Error('Please, select your 1-5 categories');
   };
@@ -39,3 +40,19 @@ export default function DreamCategory(props) {
     </>
   );
 }
+
+const categoryType = PropTypes.shape({
+  // eslint-disable-next-line react/forbid-prop-types
+  image: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  color: PropTypes.string,
+});
+
+DreamCategory.propTypes = {
+  selectedCategories: PropTypes.arrayOf(categoryType).isRequired,
+  onClickNextStep: PropTypes.func.isRequired,
+  onToggleCategory: PropTypes.func.isRequired,
+};
+
+export default DreamCategory;
