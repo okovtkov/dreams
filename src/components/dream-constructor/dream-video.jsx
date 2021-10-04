@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import VideoPlayer from '../video-player/video-player';
 import Button from '../button/button';
 
-export default function DreamVideo(props) {
+function DreamVideo(props) {
   const [video, setVideo] = useState(null);
 
   const onStop = (recordedChunks) => {
@@ -35,3 +36,9 @@ export default function DreamVideo(props) {
     </>
   );
 }
+
+DreamVideo.propTypes = {
+  onClickNextStep: PropTypes.func.isRequired,
+};
+
+export default DreamVideo;

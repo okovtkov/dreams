@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import IconVideo from '../svg-icon/icons/icon-video';
 import IconMessage from '../svg-icon/icons/icon-message';
 
-export default function DreamType(props) {
+function DreamType(props) {
   return (
     <>
       <Title>Share your dream</Title>
@@ -35,3 +36,9 @@ export default function DreamType(props) {
     </>
   );
 }
+
+DreamType.propTypes = {
+  onChangeType: PropTypes.func.isRequired,
+};
+
+export default DreamType;

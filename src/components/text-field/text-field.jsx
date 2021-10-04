@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import css from './text-field.module.scss';
 
-export default function TextField(props) {
+function TextField(props) {
   return (
     <label className={css.container}>
       {props.title}
@@ -15,3 +16,13 @@ export default function TextField(props) {
     </label>
   );
 }
+
+TextField.propTypes = {
+  title: PropTypes.string,
+  type: PropTypes.string,
+  name: PropTypes.string,
+  required: PropTypes.bool,
+  onChangeValue: PropTypes.func,
+};
+
+export default TextField;

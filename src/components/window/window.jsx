@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import css from './window.module.scss';
 
-export default function Window(props) {
+function Window(props) {
   useEffect(() => {
     if (props.open) document.body.style.overflow = 'hidden';
 
@@ -27,3 +28,11 @@ export default function Window(props) {
     </div>
   );
 }
+
+Window.propTypes = {
+  open: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+export default Window;

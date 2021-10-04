@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import Image from 'next/image';
 import React from 'react';
 import css from './dream-categories.module.scss';
@@ -109,10 +110,7 @@ export const categories = [
   },
 ];
 
-// сделать, чтобы показывало те категории, которые передаются в пропсах
-// сделать, чтобы вид категории зависил от пропс.мод
-// сделать, чтобы инпут отображался, если есть проп canSelect
-export default function DreamCategories(props) {
+function DreamCategories(props) {
   const CategoryContainer = props.canSelect ? 'label' : 'span';
 
   return (
@@ -150,3 +148,21 @@ export default function DreamCategories(props) {
     </ul>
   );
 }
+
+const categoryType = PropTypes.shape({
+  // eslint-disable-next-line react/forbid-prop-types
+  image: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  color: PropTypes.string,
+});
+
+DreamCategories.propTypes = {
+  canSelect: PropTypes.bool,
+  mode: PropTypes.oneOf(['large', 'small']).isRequired,
+  categories: PropTypes.arrayOf(categoryType).isRequired,
+  selectedCategories: PropTypes.arrayOf(categoryType),
+  onToggleCategory: PropTypes.func,
+};
+
+export default DreamCategories;

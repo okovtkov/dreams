@@ -1,13 +1,9 @@
-.container {
+.title {
+  display: block;
+  color: #B9B9B9;
   text-align: left;
   width: 100%;
   margin-bottom: 16px;
-
-  label {
-    display: block;
-    color: #B9B9B9;
-    margin-bottom: 8px;
-  }
 
   @media screen and (min-width: 768px) {
     width: 402px;

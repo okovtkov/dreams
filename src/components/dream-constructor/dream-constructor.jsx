@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import css from './dream-constructor.module.scss';
 import Window from '../window/window';
@@ -9,7 +10,7 @@ import DreamVideo from './dream-video';
 import DreamForm from './dream-form';
 import DreamFinished from './dream-finished';
 
-export default function DreamConstructor(props) {
+function DreamConstructor(props) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [type, setType] = useState('');
@@ -107,3 +108,10 @@ export default function DreamConstructor(props) {
     </Window>
   );
 }
+
+DreamConstructor.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
+};
+
+export default DreamConstructor;
