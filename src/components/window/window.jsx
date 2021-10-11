@@ -30,9 +30,9 @@ function Window(props) {
 }
 
 Window.propTypes = {
-  open: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool,
+  title: PropTypes.element,
+  onClose: PropTypes.func,
 };
 
 export default Window;

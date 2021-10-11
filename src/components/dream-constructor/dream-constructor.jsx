@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import dreams from '../../api/dreams';
 import css from './dream-constructor.module.scss';
 import Window from '../window/window';
 import DreamType from './dream-type';
@@ -14,7 +15,7 @@ function DreamConstructor(props) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [type, setType] = useState('');
-  const [video, setVideo] = useState(null);
+  const [, setVideo] = useState(null);
   const [text, setText] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -59,16 +60,13 @@ function DreamConstructor(props) {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(
-      selectedCategories,
-      type,
-      video,
+    dreams.create({
+      categories: selectedCategories.map((category) => category.id),
       text,
       name,
       email,
       country,
-    );
+    });
     nextStep();
   };
 
