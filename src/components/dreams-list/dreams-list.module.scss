@@ -33,6 +33,7 @@
   position: relative;
   display: inline-block;
   width: 115px;
+  min-height: 192px;
   margin-right: 6px;
 
   &:nth-child(3n) {
@@ -71,10 +72,23 @@
 
   @media screen and (min-width: 1024px) {
     width: 190px;
+    min-height: 285px;
 
     &:nth-child(6n) {
       margin-right: 6px;
     }
+  }
+}
+
+.item_text {
+  background: linear-gradient(206.71deg, #8F00FF 33.47%, #3625A3 91.91%, #862B88 108.28%);
+  border-radius: 7px;
+  font-size: 16px;
+  margin-bottom: 7px;
+  word-wrap: break-word;
+
+  a {
+    color: white;
   }
 }
 
