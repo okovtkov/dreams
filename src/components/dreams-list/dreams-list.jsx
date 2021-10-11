@@ -1,7 +1,5 @@
-/* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import Image from 'next/image';
 import dreams from '../../api/dreams';
 import css from './dreams-list.module.scss';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
@@ -31,7 +29,7 @@ export default function DreamsList() {
           >
             <a href="#s" className={css.link}>
               {dream.preview && (
-                <Image src={dream.preview} alt={dream.title} />
+                <img src={dream.preview} alt={dream.title} />
               )}
               {!dream.preview && (
                 <p className={css.text}>{dream.text}</p>

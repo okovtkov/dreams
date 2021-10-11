@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import Button from '../button/button';
-import completeImage from './complete.png';
 
 function DreamFinished(props) {
   return (
     <div className={css.finishedWrapper}>
       <div className={css.complete}>
-        <Image src={completeImage} alt="выполнено" />
+        <img src="/complete.png" alt="выполнено" />
       </div>
       <Title>Your dream has been sent for approval!</Title>
       <p className={css.text}>
