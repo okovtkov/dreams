@@ -12,8 +12,9 @@ const dreams = {
       .then((snapshot) => {
         const arr = [];
         snapshot.forEach((doc) => {
-          const { name, email, country, categories, text } = doc.data();
-          arr.push({ name, email, country, categories, text });
+          const { id } = doc;
+          const { name, email, country, categories, text, type, html, preview } = doc.data();
+          arr.push({ id, name, email, country, categories, text, type, html, preview });
         });
         return arr;
       });

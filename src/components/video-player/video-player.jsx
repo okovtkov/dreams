@@ -28,11 +28,6 @@ function VideoPlayer(props) {
   };
 
   const recording = () => {
-    if (playerState === 'recording') {
-      stop();
-      return;
-    }
-
     const recorder = new MediaRecorder(streaming);
     const data = [];
 

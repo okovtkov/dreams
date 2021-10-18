@@ -1,13 +1,13 @@
 /* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import Image from 'next/image';
+// import Image from 'next/image';
 import dreams from '../../api/dreams';
 import css from './dreams-list.module.scss';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
 
 export default function DreamsList() {
-  const [dreamsList, setDreamsList] = useState(null);
+  const [dreamsList, setDreamsList] = useState([]);
   const getCategoriesByIds = (ids) => ids.map((id) => {
     const category = categories.find((one) => one.id === id);
     if (!category) throw new Error(`Нет категории с таким ID: ${id}`);
@@ -15,10 +15,12 @@ export default function DreamsList() {
   });
 
   useEffect(() => {
-    dreams.get().then((result) => setDreamsList(result));
+    dreams.get().then((result) => {
+      setDreamsList(result);
+    });
   }, []);
 
-  return dreamsList ? (
+  return dreamsList.length > 0 ? (
     <>
       <h2 className={css.title}>Dream ambassadors</h2>
       <ul className={css.list}>
@@ -30,10 +32,11 @@ export default function DreamsList() {
             })}
           >
             <a href="#s" className={css.link}>
-              {dream.preview && (
-                <Image src={dream.preview} alt={dream.title} />
+              {dream.type === 'video' && (
+                // eslint-disable-next-line react/no-danger
+                <div dangerouslySetInnerHTML={{ __html: dream.preview }} />
               )}
-              {!dream.preview && (
+              {dream.type === 'text' && (
                 <p className={css.text}>{dream.text}</p>
               )}
               <DreamCategories

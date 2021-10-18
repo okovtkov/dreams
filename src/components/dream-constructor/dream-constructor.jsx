@@ -1,7 +1,10 @@
+/* eslint-disable one-var-declaration-per-line */
+/* eslint-disable one-var */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import dreams from '../../api/dreams';
+import videos from '../../api/video';
 import css from './dream-constructor.module.scss';
 import Window from '../window/window';
 import DreamType from './dream-type';
@@ -15,7 +18,7 @@ function DreamConstructor(props) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [type, setType] = useState('');
-  const [, setVideo] = useState(null);
+  const [video, setVideo] = useState(null);
   const [text, setText] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -58,16 +61,60 @@ function DreamConstructor(props) {
     setSelectedCategories(categories);
   };
 
+  const resetSteps = () => {
+    setStep(1);
+    setSelectedCategories([]);
+    setText('');
+    setVideo(null);
+    setName('');
+    setEmail('');
+    setCountry('USA');
+  };
+
+  const createPreview = (response) => {
+    const { uri } = response;
+    const id = uri.slice(8);
+    const img = `<img srcset="https://vumbnail.com/${id}_large.jpg 640w,
+      https://vumbnail.com/${id}_medium.jpg 200w, https://vumbnail.com/${id}_small.jpg 100w"
+      sizes="(max-width: 640px) 100vw, 640px" src="https://vumbnail.com/${id}.jpg" alt="превью" />`;
+    return img;
+  };
+
+  const uploadVideo = () => {
+    if (type !== 'video') return Promise.resolve();
+    let url, html;
+    return videos.create(video)
+      .then((response) => {
+        url = response.link;
+        html = response.embed.html;
+        videos.upload(response.upload.upload_link, video);
+        return response;
+      })
+      .then((response) => {
+        const preview = createPreview(response);
+        return { preview, html, url };
+      });
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
-    dreams.create({
-      categories: selectedCategories.map((category) => category.id),
-      text,
-      name,
-      email,
-      country,
-    });
-    nextStep();
+    uploadVideo()
+      .then((response) => {
+        const { html } = response;
+        const { preview } = response;
+        const videoLink = response.url;
+        dreams.create({
+          categories: selectedCategories.map((category) => category.id),
+          text: type === 'text' ? text : videoLink,
+          preview,
+          html,
+          name,
+          email,
+          country,
+          type,
+        });
+      })
+      .then(nextStep);
   };
 
   return (
@@ -101,7 +148,7 @@ function DreamConstructor(props) {
             onChangeCountry={setCountry}
           />
         )}
-        {step === 5 && <DreamFinished onClose={props.onClose} />}
+        {step === 5 && <DreamFinished onClose={props.onClose} resetSteps={resetSteps} />}
       </form>
     </Window>
   );
