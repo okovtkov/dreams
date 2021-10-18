@@ -15,9 +15,23 @@ function VideoPlayer(props) {
   const [, setTimeoutID] = useState(null);
   const [seconds, setSeconds] = useState(0);
 
+  const createImage = () => {
+    const track = streaming.getVideoTracks()[0];
+    const imageCapture = new ImageCapture(track);
+    return imageCapture.takePhoto()
+      .then((blob) => new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onload = () => resolve(reader.result);
+      }));
+  };
+
   const stop = useCallback(() => {
     setIntervalID((interval) => clearInterval(interval));
     setTimeoutID((timeout) => clearTimeout(timeout));
+    createImage().then((url) => {
+      props.onStop({ recordedChunks: 'kek', preview: url });
+    });
 
     streaming.getTracks().forEach((track) => track.stop());
     setPlayerState('stoped');
@@ -37,7 +51,6 @@ function VideoPlayer(props) {
     const data = [];
 
     recorder.ondataavailable = (event) => data.push(event.data);
-    recorder.onstop = () => props.onStop(data);
     recorder.start();
     setPlayerState('recording');
     const timeout = setTimeout(() => {

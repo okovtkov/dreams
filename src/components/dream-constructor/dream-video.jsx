@@ -7,10 +7,12 @@ import Button from '../button/button';
 
 function DreamVideo(props) {
   const [video, setVideo] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  const onStop = (recordedChunks) => {
-    const recorded = new Blob(recordedChunks, { type: 'video/webm' });
+  const onStop = (options) => {
+    const recorded = new Blob(options.recordedChunks, { type: 'video/webm' });
     setVideo(recorded);
+    setPreview(options.preview);
   };
 
   return (
@@ -21,12 +23,8 @@ function DreamVideo(props) {
         start with “Hi, I’m Robin from Sweden and I dream of ...”
       </p>
       <div className={css.videoContainer}>
-        <VideoPlayer
-          video={video}
-          setVideo={(recorded) => setVideo(recorded)}
-          onStop={onStop}
-        >
-          <Button onClick={() => props.onClickNextStep(video)}>Next step</Button>
+        <VideoPlayer video={video} onStop={onStop}>
+          <Button onClick={() => props.onClickNextStep({ video, preview })}>Next step</Button>
         </VideoPlayer>
       </div>
       <label className={css.upload}>

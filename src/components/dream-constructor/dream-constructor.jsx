@@ -1,7 +1,10 @@
+/* eslint-disable one-var-declaration-per-line */
+/* eslint-disable one-var */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import dreams from '../../api/dreams';
+import videos from '../../api/video';
 import css from './dream-constructor.module.scss';
 import Window from '../window/window';
 import DreamType from './dream-type';
@@ -15,11 +18,12 @@ function DreamConstructor(props) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [step, setStep] = useState(1);
   const [type, setType] = useState('');
-  const [, setVideo] = useState(null);
+  const [video, setVideo] = useState(null);
   const [text, setText] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState('USA');
+  const [preview, setPreview] = useState(null);
 
   const title = () => {
     const titleText = step > 4 ? 'Finished' : `Step ${step}/4`;
@@ -40,8 +44,9 @@ function DreamConstructor(props) {
     setStep(step + 1);
   };
 
-  const onRecordVideo = (recorded) => {
-    setVideo(recorded);
+  const onRecordVideo = (options) => {
+    setVideo(options.video);
+    setPreview(options.preview);
     nextStep();
   };
 
@@ -58,16 +63,49 @@ function DreamConstructor(props) {
     setSelectedCategories(categories);
   };
 
+  const resetSteps = () => {
+    setStep(1);
+    setSelectedCategories([]);
+    setText('');
+    setVideo(null);
+    setName('');
+    setEmail('');
+    setCountry('USA');
+  };
+
+  const uploadVideo = () => {
+    if (type !== 'video') return Promise.resolve();
+    let url, html;
+    return videos.create(video)
+      .then((response) => {
+        url = response.link;
+        html = response.embed.html;
+        return videos.upload(response.upload.upload_link, video);
+      })
+      .then(() => ({
+        html,
+        url,
+      }));
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
-    dreams.create({
-      categories: selectedCategories.map((category) => category.id),
-      text,
-      name,
-      email,
-      country,
-    });
-    nextStep();
+    uploadVideo()
+      .then((response) => {
+        const { html } = response;
+        const videoLink = response.url;
+        dreams.create({
+          categories: selectedCategories.map((category) => category.id),
+          text: type === 'text' ? text : videoLink,
+          preview,
+          html,
+          name,
+          email,
+          country,
+          type,
+        });
+      })
+      .then(nextStep);
   };
 
   return (
@@ -101,7 +139,7 @@ function DreamConstructor(props) {
             onChangeCountry={setCountry}
           />
         )}
-        {step === 5 && <DreamFinished onClose={props.onClose} />}
+        {step === 5 && <DreamFinished onClose={props.onClose} resetSteps={resetSteps} />}
       </form>
     </Window>
   );

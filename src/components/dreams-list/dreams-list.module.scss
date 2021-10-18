@@ -94,6 +94,10 @@
 
 .link {
   text-decoration: none;
+
+  iframe {
+    width: 100%;
+  }
 }
 
 .categories {
@@ -104,4 +108,3 @@
   padding: 0;
   list-style-type: none;
 }
-

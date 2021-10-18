@@ -7,6 +7,11 @@ import Button from '../button/button';
 import completeImage from './complete.png';
 
 function DreamFinished(props) {
+  const onClose = () => {
+    props.onClose();
+    props.resetSteps();
+  };
+
   return (
     <div className={css.finishedWrapper}>
       <div className={css.complete}>
@@ -19,7 +24,7 @@ function DreamFinished(props) {
         If you wish to remove your dream, there will be a removal link in the email, so please
         save it.
       </p>
-      <Button onClick={props.onClose}>Close</Button>
+      <Button onClick={onClose}>Close</Button>
     </div>
   );
 }
