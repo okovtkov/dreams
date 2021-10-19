@@ -33,8 +33,8 @@ export default function DreamsList() {
           >
             <a href="#s" className={css.link}>
               {dream.type === 'video' && (
+                // eslint-disable-next-line react/no-danger
                 <div dangerouslySetInnerHTML={{ __html: dream.preview }} />
-                // <img src={dream.preview} alt="превью" />
               )}
               {dream.type === 'text' && (
                 <p className={css.text}>{dream.text}</p>
