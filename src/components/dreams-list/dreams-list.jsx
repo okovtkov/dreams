@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-// import Image from 'next/image';
 import dreams from '../../api/dreams';
 import css from './dreams-list.module.scss';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
