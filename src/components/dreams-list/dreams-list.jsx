@@ -33,8 +33,8 @@ export default function DreamsList() {
           >
             <a href="#s" className={css.link}>
               {dream.type === 'video' && (
-                // <div dangerouslySetInnerHTML={{ __html: dream.html }} />
-                <img src={dream.preview} alt="превью" />
+                <div dangerouslySetInnerHTML={{ __html: dream.preview }} />
+                // <img src={dream.preview} alt="превью" />
               )}
               {dream.type === 'text' && (
                 <p className={css.text}>{dream.text}</p>

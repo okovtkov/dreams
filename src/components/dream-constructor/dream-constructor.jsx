@@ -23,7 +23,6 @@ function DreamConstructor(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState('USA');
-  const [preview, setPreview] = useState(null);
 
   const title = () => {
     const titleText = step > 4 ? 'Finished' : `Step ${step}/4`;
@@ -44,9 +43,8 @@ function DreamConstructor(props) {
     setStep(step + 1);
   };
 
-  const onRecordVideo = (options) => {
-    setVideo(options.video);
-    setPreview(options.preview);
+  const onRecordVideo = (recorded) => {
+    setVideo(recorded);
     nextStep();
   };
 
@@ -73,6 +71,13 @@ function DreamConstructor(props) {
     setCountry('USA');
   };
 
+  const createPreview = (response) => {
+    const { uri } = response;
+    const id = uri.slice(8);
+    const img = `<img srcset="https://vumbnail.com/${id}_large.jpg 640w, https://vumbnail.com/${id}_medium.jpg 200w, https://vumbnail.com/${id}_small.jpg 100w" sizes="(max-width: 640px) 100vw, 640px" src="https://vumbnail.com/${id}.jpg" alt="превью" />`;
+    return img;
+  };
+
   const uploadVideo = () => {
     if (type !== 'video') return Promise.resolve();
     let url, html;
@@ -80,12 +85,13 @@ function DreamConstructor(props) {
       .then((response) => {
         url = response.link;
         html = response.embed.html;
-        return videos.upload(response.upload.upload_link, video);
+        videos.upload(response.upload.upload_link, video);
+        return response;
       })
-      .then(() => ({
-        html,
-        url,
-      }));
+      .then((response) => {
+        const preview = createPreview(response);
+        return { preview, html, url };
+      });
   };
 
   const onSubmit = (event) => {
@@ -93,6 +99,7 @@ function DreamConstructor(props) {
     uploadVideo()
       .then((response) => {
         const { html } = response;
+        const { preview } = response;
         const videoLink = response.url;
         dreams.create({
           categories: selectedCategories.map((category) => category.id),

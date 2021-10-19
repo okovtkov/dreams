@@ -31,7 +31,8 @@
 
 .item {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   width: 115px;
   min-height: 192px;
   margin-right: 6px;
