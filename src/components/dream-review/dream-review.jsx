@@ -11,14 +11,14 @@ import IconLike from '../svg-icon/icons/icon-like';
 export default function DreamReview(props) {
   const [likeState, setLikeState] = useState(false);
 
-  return props.dreamProps.name !== '' && (
+  return props.open && (
     <section className={css.dreamReview}>
       <div className={css.video} dangerouslySetInnerHTML={{ __html: props.dreamProps.html }} />
       <div className={css.infoWrapper}>
         <div className={css.information}>
           <header className={css.header}>
             <h2>Dream</h2>
-            <button type="button" className={css.close} />
+            <button type="button" className={css.close} onClick={props.onClose} />
           </header>
           <h3 className={css.heading_3}>Sent by</h3>
           <p className={css.prop}>{props.dreamProps.name}</p>
