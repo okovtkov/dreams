@@ -10,17 +10,18 @@ import DreamReview from '../dream-review/dream-review';
 
 export default function DreamsList() {
   const [dreamsList, setDreamsList] = useState([]);
-  const getCategoriesByIds = (ids) => ids.map((id) => {
-    const category = categories.find((one) => one.id === id);
-    if (!category) throw new Error(`Нет категории с таким ID: ${id}`);
-    return category;
-  });
   const [openState, setOpenState] = useState(false);
   const [dreamProps, setDreamProps] = useState({
     selectedCategories: [],
     name: '',
     country: '',
     html: '',
+  });
+
+  const getCategoriesByIds = (ids) => ids.map((id) => {
+    const category = categories.find((one) => one.id === id);
+    if (!category) throw new Error(`Нет категории с таким ID: ${id}`);
+    return category;
   });
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function DreamsList() {
     <>
       <DreamReview
         open={openState}
-        closeWindow={() => setOpenState(false)}
+        onClose={() => setOpenState(false)}
         dreamProps={dreamProps}
       />
       <Positioner>
