@@ -1,0 +1,138 @@
+$Gray: #898989;
+$Border: #2F2F2F;
+$inputBorder: #494949;
+
+.dreamReview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(35, 35, 35, 0.65);
+  z-index: 1;
+}
+
+.video {
+  margin-right: 12px;
+}
+
+.infoWrapper {
+  background-color: #000;
+  width: 24.3%;
+  padding: 22px;
+  margin: 5px;
+  border-radius: 12px;
+}
+
+.information {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0;
+
+  h2 {
+    line-height: 102.5%;
+    margin: 0;
+  }
+}
+
+.close {
+  position: relative;
+  height: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 2px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    content: '';
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.heading_3 {
+  color: $Gray;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.prop {
+  margin: 0;
+}
+
+.category {
+  width: 59px;
+  margin-top: 6px;
+  border-radius: 3px;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  width: calc(100% + 44px);
+  margin-top: 21px;
+  margin-left: -22px;
+  padding: 15px;
+  border-top: 1px solid $Border;
+  border-bottom: 1px solid $Border;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 47px;
+  height: 47px;
+  margin-right: 15px;
+  border-radius: 50%;
+  border: 1px solid #404040;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.like_active {
+  path {
+    stroke: red;
+    fill: red;
+  }
+}
+
+.share {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  background-color: transparent;
+  color: $Gray;
+  padding: 11px;
+  border: 1px solid $inputBorder;
+  border-radius: 7px;
+}
+
+.shareButton {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  cursor: pointer;
+}

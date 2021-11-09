@@ -81,7 +81,13 @@ function DreamConstructor(props) {
   };
 
   const uploadVideo = () => {
-    if (type !== 'video') return Promise.resolve();
+    if (type !== 'video') {
+      return Promise.resolve({
+        html: null,
+        preview: null,
+        url: null,
+      });
+    }
     let url, html;
     return videos.create(video)
       .then((response) => {
@@ -100,8 +106,7 @@ function DreamConstructor(props) {
     event.preventDefault();
     uploadVideo()
       .then((response) => {
-        const { html } = response;
-        const { preview } = response;
+        const { html, preview } = response;
         const videoLink = response.url;
         dreams.create({
           categories: selectedCategories.map((category) => category.id),
