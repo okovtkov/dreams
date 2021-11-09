@@ -77,11 +77,49 @@ $inputBorder: #494949;
   margin: 0;
 }
 
+.categories {
+  display: flex;
+}
+
+.imageWrapper {
+  position: relative;
+
+  &:hover {
+    .hint {
+      display: block;
+    }
+  }
+}
+
 .category {
   width: 59px;
   margin-top: 6px;
   margin-right: 5px;
   border-radius: 3px;
+}
+
+.hint {
+  position: absolute;
+  top: -30px;
+  left: 29.5px;
+  transform: translateX(-50%);
+  display: none;
+  width: auto;
+  padding: 2px 8px;
+  background: #484848;
+  border-radius: 3px;
+  white-space: nowrap;
+
+  &::after {
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg) translateX(-50%);
+    background-color: inherit;
+    content: '';
+  }
 }
 
 .likes {

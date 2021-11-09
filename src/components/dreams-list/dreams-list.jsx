@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
@@ -49,8 +51,9 @@ export default function DreamsList() {
               className={classNames(css.item, {
                 [css.item_text]: !dream.preview,
               })}
+              onClick={() => onClick(dream)}
             >
-              <a href="#s" className={css.link} onClick={() => onClick(dream)}>
+              <a href="#s" className={css.link}>
                 {dream.type === 'video' && (
                   // eslint-disable-next-line react/no-danger
                   <div className={css.image} dangerouslySetInnerHTML={{ __html: dream.preview }} />

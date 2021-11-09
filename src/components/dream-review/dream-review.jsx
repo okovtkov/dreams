@@ -25,16 +25,19 @@ export default function DreamReview(props) {
           <h3 className={css.heading_3}>Location</h3>
           <p className={css.prop}>{props.dreamProps.country}</p>
           <h3 className={css.heading_3}>Categories</h3>
-          <div>
+          <div className={css.categories}>
             {categories.map((category) => {
               if (props.dreamProps.categories.find((item) => item === category.id)) {
                 return (
-                  <img
-                    key={category.id}
-                    src={category.image}
-                    alt={category.title}
-                    className={css.category}
-                  />
+                  <div className={css.imageWrapper}>
+                    <img
+                      key={category.id}
+                      src={category.image}
+                      alt={category.title}
+                      className={css.category}
+                    />
+                    <div className={css.hint}>{category.title}</div>
+                  </div>
                 );
               }
               return null;
