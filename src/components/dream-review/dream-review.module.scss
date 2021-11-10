@@ -46,8 +46,10 @@ $inputBorder: #494949;
 .close {
   position: relative;
   height: 18px;
+  margin-right: 9px;
   background-color: transparent;
   border: none;
+  font-size: 0;
   cursor: pointer;
 
   &::before,
