@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import dreams from '../../api/dreams';
 import { categories } from '../dream-categories/dream-categories';
@@ -17,13 +17,18 @@ export default function DreamReview(props) {
     country: '',
     categories: [],
   });
+  const link = useRef();
+
+  const copyText = () => {
+    navigator.clipboard.writeText(link.current.value);
+  };
 
   useEffect(() => {
     dreams.get().then((dreamsList) => {
       const result = dreamsList.find((item) => item.id === props.dreamId);
       setDream(result);
     });
-  }, [dream]);
+  }, []);
 
   return (
     <section className={css.dreamReview}>
@@ -43,9 +48,8 @@ export default function DreamReview(props) {
             {categories.map((category) => {
               if (dream.categories.find((item) => item === category.id)) {
                 return (
-                  <div className={css.imageWrapper}>
+                  <div className={css.imageWrapper} key={category.id}>
                     <img
-                      key={category.id}
                       src={category.image}
                       alt={category.title}
                       className={css.category}
@@ -71,10 +75,16 @@ export default function DreamReview(props) {
           </div>
           <h3 className={css.heading_3}>Share this dream</h3>
           <div className={css.share}>
-            <input className={css.input} type="text" value="kek" disabled />
-            <div className={css.shareButton}>
+            <input
+              ref={link}
+              className={css.input}
+              type="text"
+              value={`localhost:3000/dream/${dream.id}`}
+              disabled
+            />
+            <button className={css.shareButton} type="button" onClick={() => copyText()}>
               <IconShareLink />
-            </div>
+            </button>
           </div>
         </div>
         <div className={css.controls} />

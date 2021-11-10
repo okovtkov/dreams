@@ -170,10 +170,11 @@ $inputBorder: #494949;
 
 .shareButton {
   position: absolute;
-  top: 11px;
-  right: 11px;
+  top: 9px;
+  right: 15px;
   width: 24px;
   height: 24px;
+  border: none;
   background-color: #000;
   cursor: pointer;
 }
