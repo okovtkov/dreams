@@ -1,23 +1,13 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import classNames from 'classnames';
 import dreams from '../../api/dreams';
 import css from './dreams-list.module.scss';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
 import Positioner from '../positioner/positioner';
-import DreamReview from '../dream-review/dream-review';
 
 export default function DreamsList() {
   const [dreamsList, setDreamsList] = useState([]);
-  const [openState, setOpenState] = useState(false);
-  const [dreamProps, setDreamProps] = useState({
-    selectedCategories: [],
-    name: '',
-    country: '',
-    html: '',
-  });
 
   const getCategoriesByIds = (ids) => ids.map((id) => {
     const category = categories.find((one) => one.id === id);
@@ -29,30 +19,19 @@ export default function DreamsList() {
     dreams.get().then((result) => setDreamsList(result));
   }, []);
 
-  const onClick = (dream) => {
-    setOpenState(true);
-    setDreamProps(dream);
-  };
-
   return dreamsList.length > 0 ? (
-    <>
-      <DreamReview
-        open={openState}
-        onClose={() => setOpenState(false)}
-        dreamProps={dreamProps}
-      />
-      <Positioner>
-        <h2 className={css.title}>Dream ambassadors</h2>
-        <ul className={css.list}>
-          {dreamsList.map((dream) => (
-            <li
-              key={dream.id}
-              className={classNames(css.item, {
-                [css.item_text]: !dream.preview,
-              })}
-              onClick={() => onClick(dream)}
-            >
-              <a href="#s" className={css.link}>
+    <Positioner>
+      <h2 className={css.title}>Dream ambassadors</h2>
+      <ul className={css.list}>
+        {dreamsList.map((dream) => (
+          <li
+            key={dream.id}
+            className={classNames(css.item, {
+              [css.item_text]: !dream.preview,
+            })}
+          >
+            <Link href={`/dream/${dream.id}`}>
+              <a href={`/dream/${dream.id}`} className={css.link}>
                 {dream.type === 'video' && (
                   // eslint-disable-next-line react/no-danger
                   <div className={css.image} dangerouslySetInnerHTML={{ __html: dream.preview }} />
@@ -65,10 +44,10 @@ export default function DreamsList() {
                   mode="small"
                 />
               </a>
-            </li>
-          ))}
-        </ul>
-      </Positioner>
-    </>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Positioner>
   ) : <span>ЗАГРУЗОЧКА</span>;
 }

@@ -1,8 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-danger */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import dreams from '../../api/dreams';
 import { categories } from '../dream-categories/dream-categories';
 import css from './dream-review.module.scss';
 import IconShareLink from '../svg-icon/icons/icon-share-link';
@@ -10,24 +11,37 @@ import IconLike from '../svg-icon/icons/icon-like';
 
 export default function DreamReview(props) {
   const [likeState, setLikeState] = useState(false);
+  const [dream, setDream] = useState({
+    html: '',
+    name: '',
+    country: '',
+    categories: [],
+  });
 
-  return props.open && (
+  useEffect(() => {
+    dreams.get().then((dreamsList) => {
+      const result = dreamsList.find((item) => item.id === props.dreamId);
+      setDream(result);
+    });
+  }, [dream]);
+
+  return (
     <section className={css.dreamReview}>
-      <div className={css.video} dangerouslySetInnerHTML={{ __html: props.dreamProps.html }} />
+      <div className={css.video} dangerouslySetInnerHTML={{ __html: dream.html }} />
       <div className={css.infoWrapper}>
         <div className={css.information}>
           <header className={css.header}>
             <h2>Dream</h2>
-            <button type="button" className={css.close} onClick={props.onClose} />
+            <a href="/" className={css.close}>закрыть</a>
           </header>
           <h3 className={css.heading_3}>Sent by</h3>
-          <p className={css.prop}>{props.dreamProps.name}</p>
+          <p className={css.prop}>{dream.name}</p>
           <h3 className={css.heading_3}>Location</h3>
-          <p className={css.prop}>{props.dreamProps.country}</p>
+          <p className={css.prop}>{dream.country}</p>
           <h3 className={css.heading_3}>Categories</h3>
           <div className={css.categories}>
             {categories.map((category) => {
-              if (props.dreamProps.categories.find((item) => item === category.id)) {
+              if (dream.categories.find((item) => item === category.id)) {
                 return (
                   <div className={css.imageWrapper}>
                     <img
