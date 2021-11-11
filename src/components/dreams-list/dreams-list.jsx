@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -30,8 +31,8 @@ export default function DreamsList() {
               [css.item_text]: !dream.preview,
             })}
           >
-            <Link href={`/dream/${dream.id}`}>
-              <a href={`/dream/${dream.id}`} className={css.link}>
+            <Link href={`/dream/${dream.id}`} scroll={false}>
+              <a className={css.link}>
                 {dream.type === 'video' && (
                   // eslint-disable-next-line react/no-danger
                   <div className={css.image} dangerouslySetInnerHTML={{ __html: dream.preview }} />
