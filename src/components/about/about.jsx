@@ -14,14 +14,8 @@ export default function About() {
     <Positioner className={css.wrapper} id="about">
       <h1 className={css.title}>What does the world dream of?</h1>
       <picture className={css.image}>
-        <source srcSet={Planet.src} media="(min-width: 540px)" className={css.source} />
-        <img
-          src={PlanetMob.src}
-          alt="планета"
-          height={PlanetMob.height}
-          width={PlanetMob.width}
-          className={css.img}
-        />
+        <source srcSet={Planet} media="(min-width: 540px)" className={css.source} />
+        <img src={PlanetMob} alt="планета" className={css.img} />
       </picture>
       <p className={css.text}>
         Deploy offline this discussion for product launch the right info at the right time to the
