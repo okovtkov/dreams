@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build && next export --out docs",
     "start": "next start",
     "lint": "eslint --ext .js,.jsx src/",
     "postinstall": "husky install",
