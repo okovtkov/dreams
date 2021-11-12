@@ -45,19 +45,6 @@ $inputBorder: #494949;
   }
 }
 
-.text {
-  word-break: break-all;
-  background: linear-gradient(206.71deg, #8F00FF 33.47%, #3625A3 91.91%, #862B88 108.28%);
-  text-align: center;
-  padding: 22px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-
-  @media screen and (min-width: 1024px) {
-    margin-bottom: 0;
-  }
-}
-
 .video {
   iframe {
     max-width: 100%;
@@ -78,6 +65,23 @@ $inputBorder: #494949;
 
   @media screen and (min-width: 768px) {
     width: 400px;
+  }
+}
+
+.text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: linear-gradient(206.71deg, #8F00FF 33.47%, #3625A3 91.91%, #862B88 108.28%);
+  text-align: center;
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 1024px) {
+    width: 300px;
+    height: 400px;
+    vertical-align: middle;
+    margin-bottom: 0;
   }
 }
 

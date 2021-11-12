@@ -35,7 +35,14 @@
 
 .about {
   color: #FFFFFF;
+  background-color: transparent;
   opacity: 0.71;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .about_mobile {

@@ -20,7 +20,7 @@ function Window(props) {
     >
       <section className={css.window}>
         <header className={css.header}>
-          <span>{props.title}</span>
+          <span className={css.title}>{props.title}</span>
           <button aria-label="закрыть" type="button" className={css.close} onClick={props.onClose} />
         </header>
         {props.children}
