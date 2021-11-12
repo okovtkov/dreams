@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 import dreams from '../../api/dreams';
@@ -29,9 +29,9 @@ export default function DreamReview(props) {
       const result = dreamsList.find((item) => item.id === props.dreamId);
       setDream(result);
     });
-  }, []);
+  }, [props.dreamId]);
 
-  return (
+  return dream?.id ? (
     <section className={css.dreamReview}>
       <div className={css.wrapper}>
         {dream.html ? (
@@ -99,5 +99,5 @@ export default function DreamReview(props) {
         </div>
       </div>
     </section>
-  );
+  ) : null;
 }
