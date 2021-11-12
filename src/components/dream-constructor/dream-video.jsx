@@ -25,6 +25,7 @@ function DreamVideo(props) {
           video={video}
           setVideo={(recorded) => setVideo(recorded)}
           onStop={onStop}
+          open={props.open}
         >
           <Button onClick={() => props.onClickNextStep(video)}>Next step</Button>
         </VideoPlayer>

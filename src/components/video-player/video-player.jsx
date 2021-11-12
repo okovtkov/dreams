@@ -21,7 +21,7 @@ function VideoPlayer(props) {
 
     streaming.getTracks().forEach((track) => track.stop());
     setPlayerState('stoped');
-  }, [streaming]);
+  }, [streaming, props.open]);
 
   const timer = () => {
     setSeconds((old) => old + 1);
