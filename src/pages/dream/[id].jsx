@@ -7,7 +7,7 @@ export default function PageIndex() {
   const router = useRouter();
   return (
     <LayoutDefault>
-      <DreamReview dreamId={router.query.id} />
+      <DreamReview onClose={() => router.push('/')} dreamId={router.query.id} />
     </LayoutDefault>
   );
 }

@@ -31,6 +31,11 @@ export default function DreamReview(props) {
     });
   }, [props.dreamId]);
 
+  const closeHandler = (event) => {
+    event.preventDefault();
+    props.onClose();
+  };
+
   return dream?.id ? (
     <section className={css.dreamReview}>
       <div className={css.wrapper}>
@@ -43,8 +48,16 @@ export default function DreamReview(props) {
           <div className={css.information}>
             <header className={css.header}>
               <h2>Dream</h2>
-              <Link href="/" scroll={false}>
-                <a className={css.close}>закрыть</a>
+              <Link href="/" scroll={false} shallow>
+                <a
+                  className={css.close}
+                  onClick={closeHandler}
+                  onKeyDown={closeHandler}
+                  tabIndex={0}
+                  role="button"
+                >
+                  закрыть
+                </a>
               </Link>
             </header>
             <h3 className={css.heading_3}>Sent by</h3>

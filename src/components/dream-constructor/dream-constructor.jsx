@@ -122,8 +122,13 @@ function DreamConstructor(props) {
       .then(nextStep);
   };
 
+  const onClose = () => {
+    props.onClose();
+    // resetSteps();
+  };
+
   return (
-    <Window title={title()} open={props.open} onClose={props.onClose}>
+    <Window title={title()} open={props.open} onClose={onClose}>
       <form action="#" name="form" onSubmit={onSubmit}>
         {step === 1 && (
           <DreamType onChangeType={onChangeType} />
@@ -144,6 +149,7 @@ function DreamConstructor(props) {
         {step === 3 && type === 'video' && (
           <DreamVideo
             onClickNextStep={onRecordVideo}
+            open={props.open}
           />
         )}
         {step === 4 && (
