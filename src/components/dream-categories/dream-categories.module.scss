@@ -10,7 +10,7 @@
 .list_small {
   position: absolute;
   bottom: 20px;
-  right: 10px;
+  right: 3px;
   justify-content: flex-end;
 }
 
@@ -27,15 +27,12 @@
   padding: 0px 3.5px;
   border-radius: 3px;
   margin-right: 4px;
+  margin-top: 4px;
   color: white;
   background-color: red;
   text-align: center;
   vertical-align: top;
   font-weight: bold;
-
-  &:last-child {
-    margin-right: 0;
-  }
 
   @media screen and (min-width: 1024px) {
     padding: 0 5px;

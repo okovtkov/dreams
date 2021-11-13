@@ -13,7 +13,7 @@ function DreamFinished(props) {
   return (
     <div className={css.finishedWrapper}>
       <div className={css.complete}>
-        <img src="/assets/complete.png" alt="выполнено" />
+        <img src="/dreams/assets/complete.png" alt="выполнено" />
       </div>
       <Title>Your dream has been sent for approval!</Title>
       <p className={css.text}>
