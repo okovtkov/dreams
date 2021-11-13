@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "react-scripts build",
-    "deploy": "gh-pages -b docs -d build",
+    "deploy": "gh-pages -b docs -d build -u \"vasilich99 <oleg_kovtkov@mail.ru>\"",
     "lint": "eslint --ext .js,.jsx src/",
     "postinstall": "husky install",
     "pre-commit": "npm run lint"
