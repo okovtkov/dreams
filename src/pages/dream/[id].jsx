@@ -1,13 +1,15 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate, useParams } from 'react-router-dom';
 import DreamReview from '../../components/dream-review/dream-review';
 import LayoutDefault from '../../layouts/default';
 
 export default function PageIndex() {
-  const router = useRouter();
+  const params = useParams();
+  const navigate = useNavigate();
+
   return (
     <LayoutDefault>
-      <DreamReview onClose={() => router.push('/')} dreamId={router.query.id} />
+      <DreamReview onClose={() => navigate('/')} dreamId={params.id} />
     </LayoutDefault>
   );
 }

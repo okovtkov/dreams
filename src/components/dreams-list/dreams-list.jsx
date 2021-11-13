@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import DreamReview from '../dream-review/dream-review';
 import dreams from '../../api/dreams';
@@ -53,7 +53,7 @@ export default function DreamsList() {
                 [css.item_text]: !dream.preview,
               })}
             >
-              <Link href={`/dream/${dream.id}`} scroll={false} shallow>
+              <Link to={`/dream/${dream.id}`}>
                 <a
                   className={css.link}
                   onClick={(e) => clickAtDreamHandler(e, dream)}

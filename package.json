@@ -2,9 +2,8 @@
   "name": "dream",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next export",
-    "start": "next start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "lint": "eslint --ext .js,.jsx src/",
     "postinstall": "husky install",
     "pre-commit": "npm run lint"
@@ -12,12 +11,11 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "firebase": "^9.1.1",
-    "next": "^11.1.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "sass": "^1.39.0",
-    "vimeo": "^2.1.1"
+    "react-router-dom": "^6.0.2",
+    "sass": "^1.39.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
@@ -27,6 +25,19 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.3",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^7.0.2"
+    "husky": "^7.0.2",
+    "react-scripts": "^4.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
