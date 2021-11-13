@@ -10,9 +10,10 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  padding: 0;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  padding: 0;
   font-size: 11px;
 
   &:first-child {
@@ -20,12 +21,10 @@
   }
 
   @media screen and (min-width: 768px) {
-    max-width: 750px;
     font-size: 12px;
   }
 
   @media screen and (min-width: 1024px) {
-    max-width: 1024px;
     font-size: 16px;
   }
 
@@ -38,58 +37,28 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 115px;
-  min-height: 192px;
-  margin-right: 6px;
-  margin-bottom: 7px;
+  width: 48%;
+  aspect-ratio: 1/1.5;
+  margin-right: 1%;
+  margin-bottom: 1%;
   margin-top: 0;
   vertical-align: top;
   text-align: center;
+  background-color: #000;
   border: 1px solid rgb(49, 49, 49);
   border-radius: 7px;
   cursor: pointer;
 
-  &:nth-child(3n) {
-    margin-right: 0;
+  @media screen and (min-width: 400px) {
+    width: 32%;
   }
 
-  @media screen and (min-width: 490px) {
-    &:nth-child(3n) {
-      margin-right: 6px;
-    }
-
-    &:nth-child(4n) {
-      margin-right: 0;
-    }
+  @media screen and (min-width: 768px) {
+    width: 24%;
   }
 
-  @media screen and (min-width: 615px) {
-    &:nth-child(4n) {
-      margin-right: 6px;
-    }
-
-    &:nth-child(5n) {
-      margin-right: 0;
-    }
-  }
-
-  @media screen and (min-width: 736px) {
-    &:nth-child(5n) {
-      margin-right: 6px;
-    }
-
-    &:nth-child(6n) {
-      margin-right: 0;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 190px;
-    min-height: 285px;
-
-    &:nth-child(6n) {
-      margin-right: 6px;
-    }
+  @media screen and (min-width: 1200px) {
+    width: 15%;
   }
 }
 
