@@ -33,6 +33,7 @@ export default function DreamsList() {
         <ul className={css.list}>
           {dreamsList.map((dream) => (
             <DreamPreview
+              key={dream.id}
               dream={dream}
               activeDreamId={activeDreamId}
               setActiveDreamId={setActiveDreamId}

@@ -22,7 +22,6 @@ export default function DreamPreview(props) {
 
   return (
     <li
-      key={props.dream.id}
       className={classNames(css.item, {
         [css.item_text]: !props.dream.preview,
       })}

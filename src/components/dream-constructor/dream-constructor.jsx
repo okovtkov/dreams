@@ -106,13 +106,10 @@ function DreamConstructor(props) {
     event.preventDefault();
     uploadVideo()
       .then((response) => {
-        const { html, preview } = response;
         const videoLink = response.url;
         dreams.create({
           categories: selectedCategories.map((category) => category.id),
           text: type === 'text' ? text : videoLink,
-          preview,
-          html,
           name,
           email,
           country,
