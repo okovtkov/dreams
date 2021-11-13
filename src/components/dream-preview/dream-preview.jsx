@@ -7,7 +7,7 @@ import DreamCategories, { categories } from '../dream-categories/dream-categorie
 export default function DreamPreview(props) {
   const clickAtDreamHandler = (event, dream) => {
     event.preventDefault();
-    props.setActiveDreamId(dream.id);
+    props.onSelectDream(dream);
   };
 
   const getCategoriesByIds = (ids) => ids.map((id) => {
@@ -28,7 +28,7 @@ export default function DreamPreview(props) {
     >
       <Link
         className={css.link}
-        to={`/dream/${props.dream.id}`}
+        to={`/${props.dream.id}`}
         onClick={(e) => clickAtDreamHandler(e, props.dream)}
         onKeyDown={(e) => clickAtDreamHandler(e, props.dream)}
         tabIndex={0}
@@ -36,9 +36,11 @@ export default function DreamPreview(props) {
       >
         {props.dream.type === 'video' && (
           <img
-            srcSet={`https://vumbnail.com/${id}_large.jpg 640w,
-            https://vumbnail.com/${id}_medium.jpg 200w,
-            https://vumbnail.com/${id}_small.jpg 100w`}
+            srcSet={`
+              https://vumbnail.com/${id}_large.jpg 640w,
+              https://vumbnail.com/${id}_medium.jpg 200w,
+              https://vumbnail.com/${id}_small.jpg 100w
+            `}
             sizes="(max-width: 640px) 100vw, 640px"
             src={`https://vumbnail.com/${id}.jpg`}
             alt="превью"

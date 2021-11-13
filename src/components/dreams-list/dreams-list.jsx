@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import DreamReview from '../dream-review/dream-review';
 import dreams from '../../api/dreams';
 import css from './dreams-list.module.scss';
@@ -8,12 +8,13 @@ import Positioner from '../positioner/positioner';
 import DreamPreview from '../dream-preview/dream-preview';
 
 export default function DreamsList() {
+  const params = useParams();
   const [dreamsList, setDreamsList] = useState([]);
-  const [activeDreamId, setActiveDreamId] = useState(null);
+  const [activeDreamId, setActiveDreamId] = useState(params.id);
 
   useEffect(() => {
     if (activeDreamId) {
-      history.pushState(null, document.title, `/dream/${activeDreamId}`);
+      history.pushState(null, document.title, `/${activeDreamId}`);
     } else if (document.location.pathname !== '/dreams') {
       history.pushState(null, document.title, '/dreams');
     }
@@ -35,8 +36,7 @@ export default function DreamsList() {
             <DreamPreview
               key={dream.id}
               dream={dream}
-              activeDreamId={activeDreamId}
-              setActiveDreamId={setActiveDreamId}
+              onSelectDream={(selectedDream) => setActiveDreamId(selectedDream.id)}
             />
           ))}
         </ul>
