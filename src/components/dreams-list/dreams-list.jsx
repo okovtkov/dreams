@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import DreamReview from '../dream-review/dream-review';
 import dreams from '../../api/dreams';
@@ -10,8 +10,9 @@ import DreamCategories, { categories } from '../dream-categories/dream-categorie
 import Positioner from '../positioner/positioner';
 
 export default function DreamsList() {
+  const params = useParams();
   const [dreamsList, setDreamsList] = useState([]);
-  const [activeDreamId, setActiveDreamId] = useState(null);
+  const [activeDreamId, setActiveDreamId] = useState(params.id);
 
   const getCategoriesByIds = (ids) => ids.map((id) => {
     const category = categories.find((one) => one.id === id);
@@ -21,7 +22,7 @@ export default function DreamsList() {
 
   useEffect(() => {
     if (activeDreamId) {
-      history.pushState(null, document.title, `/dream/${activeDreamId}`);
+      history.pushState(null, document.title, `/dreams/${activeDreamId}`);
     } else if (document.location.pathname !== '/dreams') {
       history.pushState(null, document.title, '/dreams');
     }
@@ -53,7 +54,7 @@ export default function DreamsList() {
             >
               <Link
                 className={css.link}
-                to={`/dream/${dream.id}`}
+                to={`/${dream.id}`}
                 onClick={(e) => clickAtDreamHandler(e, dream)}
                 onKeyDown={(e) => clickAtDreamHandler(e, dream)}
                 tabIndex={0}
