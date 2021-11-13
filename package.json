@@ -4,7 +4,7 @@
   "homepage": "https://vasilich99.github.io/dreams",
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "react-scripts build",
+    "predeploy": "react-scripts build && cd ./build && ln -s index.html 404.html",
     "deploy": "gh-pages -b docs -d build -u \"github-actions-bot <support+actions@github.com>\"",
     "lint": "eslint --ext .js,.jsx src/",
     "postinstall": "husky install",

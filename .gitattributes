@@ -1,2 +1,7 @@
 * text eol=lf
 package-lock.json binary
+*.png binary
+*.jpg binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
