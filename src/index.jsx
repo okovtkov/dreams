@@ -7,7 +7,7 @@ import './assets/styles.css';
 
 ReactDOM.render(
   (
-    <Router>
+    <Router basename="/dreams">
       <Routes>
         <Route path="/" element={<PageIndex />} />
         <Route path="/dream/:id" element={<PageDream />} />
