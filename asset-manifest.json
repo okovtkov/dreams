@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/dreams/static/css/main.2baa72b5.chunk.css",
+    "main.js": "/dreams/static/js/main.2923e9a5.chunk.js",
+    "main.js.map": "/dreams/static/js/main.2923e9a5.chunk.js.map",
+    "runtime-main.js": "/dreams/static/js/runtime-main.f98d2e75.js",
+    "runtime-main.js.map": "/dreams/static/js/runtime-main.f98d2e75.js.map",
+    "static/js/2.ddd2e228.chunk.js": "/dreams/static/js/2.ddd2e228.chunk.js",
+    "static/js/2.ddd2e228.chunk.js.map": "/dreams/static/js/2.ddd2e228.chunk.js.map",
+    "index.html": "/dreams/index.html",
+    "static/css/main.2baa72b5.chunk.css.map": "/dreams/static/css/main.2baa72b5.chunk.css.map",
+    "static/js/2.ddd2e228.chunk.js.LICENSE.txt": "/dreams/static/js/2.ddd2e228.chunk.js.LICENSE.txt",
+    "static/media/planet.2e1f21c8.png": "/dreams/static/media/planet.2e1f21c8.png",
+    "static/media/planet_mobile.8dcd020c.png": "/dreams/static/media/planet_mobile.8dcd020c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f98d2e75.js",
+    "static/js/2.ddd2e228.chunk.js",
+    "static/css/main.2baa72b5.chunk.css",
+    "static/js/main.2923e9a5.chunk.js"
+  ]
+}
