@@ -22,10 +22,8 @@ export default function DreamsList() {
   useEffect(() => {
     if (activeDreamId) {
       history.pushState(null, document.title, `/dream/${activeDreamId}`);
-      return;
-    }
-    if (document.location.pathname !== '/' && !activeDreamId) {
-      history.pushState(null, document.title, '/');
+    } else if (document.location.pathname !== '/dreams') {
+      history.pushState(null, document.title, '/dreams');
     }
   }, [activeDreamId]);
 
@@ -53,29 +51,28 @@ export default function DreamsList() {
                 [css.item_text]: !dream.preview,
               })}
             >
-              <Link to={`/dream/${dream.id}`}>
-                <a
-                  className={css.link}
-                  onClick={(e) => clickAtDreamHandler(e, dream)}
-                  onKeyDown={(e) => clickAtDreamHandler(e, dream)}
-                  role="button"
-                  tabIndex={0}
-                >
-                  {dream.type === 'video' && (
-                    <div
-                      className={css.image}
-                      // eslint-disable-next-line react/no-danger
-                      dangerouslySetInnerHTML={{ __html: dream.preview }}
-                    />
-                  )}
-                  {dream.type === 'text' && (
-                    <p className={css.text}>{dream.text}</p>
-                  )}
-                  <DreamCategories
-                    categories={getCategoriesByIds(dream.categories)}
-                    mode="small"
+              <Link
+                className={css.link}
+                to={`/dream/${dream.id}`}
+                onClick={(e) => clickAtDreamHandler(e, dream)}
+                onKeyDown={(e) => clickAtDreamHandler(e, dream)}
+                tabIndex={0}
+                role="button"
+              >
+                {dream.type === 'video' && (
+                  <div
+                    className={css.image}
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{ __html: dream.preview }}
                   />
-                </a>
+                )}
+                {dream.type === 'text' && (
+                  <p className={css.text}>{dream.text}</p>
+                )}
+                <DreamCategories
+                  categories={getCategoriesByIds(dream.categories)}
+                  mode="small"
+                />
               </Link>
             </li>
           ))}
