@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/no-danger */
 import React, { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import dreams from '../../api/dreams';
 import { categories } from '../dream-categories/dream-categories';
@@ -48,7 +48,7 @@ export default function DreamReview(props) {
           <div className={css.information}>
             <header className={css.header}>
               <h2>Dream</h2>
-              <Link href="/" scroll={false} shallow>
+              <Link to="/">
                 <a
                   className={css.close}
                   onClick={closeHandler}
