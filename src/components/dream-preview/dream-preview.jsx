@@ -23,7 +23,7 @@ export default function DreamPreview(props) {
   return (
     <li
       className={classNames(css.item, {
-        [css.item_text]: !props.dream.preview,
+        [css.item_text]: props.dream.type === 'text',
       })}
     >
       <Link

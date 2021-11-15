@@ -71,35 +71,16 @@ function DreamConstructor(props) {
     setCountry('USA');
   };
 
-  const createPreview = (response) => {
-    const { uri } = response;
-    const id = uri.slice(8);
-    const img = `<img srcset="https://vumbnail.com/${id}_large.jpg 640w,
-      https://vumbnail.com/${id}_medium.jpg 200w, https://vumbnail.com/${id}_small.jpg 100w"
-      sizes="(max-width: 640px) 100vw, 640px" src="https://vumbnail.com/${id}.jpg" alt="превью" />`;
-    return img;
-  };
-
   const uploadVideo = () => {
     if (type !== 'video') {
-      return Promise.resolve({
-        html: null,
-        preview: null,
-        url: null,
-      });
+      return Promise.resolve({ url: null });
     }
-    let url, html;
     return videos.create(video)
       .then((response) => {
-        url = response.link;
-        html = response.embed.html;
         videos.upload(response.upload.upload_link, video);
         return response;
       })
-      .then((response) => {
-        const preview = createPreview(response);
-        return { preview, html, url };
-      });
+      .then((response) => response.link);
   };
 
   const onSubmit = (event) => {
