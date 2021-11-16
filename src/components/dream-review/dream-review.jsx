@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/no-danger */
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState, useRef, useEffect, useMemo,
+} from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import dreams from '../../api/dreams';
@@ -16,9 +18,13 @@ export default function DreamReview(props) {
     name: '',
     country: '',
     categories: [],
+    text: '',
+    type: '',
     id: '',
   });
   const link = useRef();
+
+  const id = useMemo(() => (dream.type === 'video' ? new URL(dream.text).pathname.slice(1) : ''), [dream]);
 
   const copyText = () => {
     navigator.clipboard.writeText(link.current.value);
@@ -39,8 +45,19 @@ export default function DreamReview(props) {
   return dream?.id ? (
     <section className={css.dreamReview}>
       <div className={css.wrapper}>
-        {dream.html ? (
-          <div className={css.video} dangerouslySetInnerHTML={{ __html: dream.html }} />
+        {dream.type === 'video' ? (
+          <div className={css.video}>
+            <iframe
+              src={`https://player.vimeo.com/video/${id}?h=4e00583ca7&title=0&byline=0&portrait=0&
+                speed=0&badge=0&autopause=0&player_id=0&app_id=228308`}
+              width="400"
+              height="300"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              title="Untitled"
+            />
+          </div>
         ) : (
           <div className={css.text}>{dream.text}</div>
         )}
