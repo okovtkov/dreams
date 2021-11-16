@@ -13,8 +13,8 @@ const dreams = {
         const arr = [];
         snapshot.forEach((doc) => {
           const { id } = doc;
-          const { name, email, country, categories, text, type, html, preview } = doc.data();
-          arr.push({ id, name, email, country, categories, text, type, html, preview });
+          const { name, email, country, categories, text, type } = doc.data();
+          arr.push({ id, name, email, country, categories, text, type });
         });
         return arr;
       });
