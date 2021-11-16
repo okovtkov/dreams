@@ -13,6 +13,11 @@ function DreamVideo(props) {
     setVideo(recorded);
   };
 
+  const onClickNextStep = (recorded) => {
+    props.dispatch({ type: 'setVideo', payload: recorded });
+    props.dispatch({ type: 'stepUp' });
+  };
+
   return (
     <>
       <Title>Record your dream</Title>
@@ -27,7 +32,7 @@ function DreamVideo(props) {
           onStop={onStop}
           open={props.open}
         >
-          <Button onClick={() => props.onClickNextStep(video)}>Next step</Button>
+          <Button onClick={() => onClickNextStep(video)}>Next step</Button>
         </VideoPlayer>
       </div>
       <label className={css.upload}>
@@ -39,7 +44,7 @@ function DreamVideo(props) {
 }
 
 DreamVideo.propTypes = {
-  onClickNextStep: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default DreamVideo;

@@ -13,39 +13,10 @@ import DreamMessage from './dream-message';
 import DreamVideo from './dream-video';
 import DreamForm from './dream-form';
 import DreamFinished from './dream-finished';
-
-function init(state) {
-  return { ...state };
-}
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'stepUp': return { ...state, step: state.step + 1 };
-    case 'stepDown': return { ...state, step: Math.max(state.step - 1, 1) };
-    case 'type': return { ...state, type: action.newType };
-    case 'categories': return { ...state, categories: action.categories };
-    case 'video': return { ...state, video: action.video };
-    case 'text': return { ...state, text: action.text };
-    case 'name': return { ...state, name: action.name };
-    case 'email': return { ...state, email: action.email };
-    case 'country': return { ...state, country: action.country };
-    case 'reset': return init(action.payload);
-    default: return '';
-  }
-}
+import { reducer, initialState } from './reducer';
 
 function DreamConstructor(props) {
-  const initialState = {
-    categories: [],
-    step: 1,
-    type: '',
-    video: null,
-    text: '',
-    name: '',
-    email: '',
-    country: 'USA',
-  };
-  const [state, dispatch] = useReducer(reducer, initialState, init);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const title = () => {
     const titleText = state.step > 4 ? 'Finished' : `Step ${state.step}/4`;
@@ -62,22 +33,12 @@ function DreamConstructor(props) {
     );
   };
 
-  const onRecordVideo = (recorded) => {
-    dispatch({ type: 'video', video: recorded });
-    dispatch({ type: 'stepUp' });
-  };
-
-  const onChangeType = (newType) => {
-    dispatch({ type: 'type', newType });
-    dispatch({ type: 'stepUp' });
-  };
-
   const toggleCategory = (category) => {
     const categories = state.categories.includes(category)
       ? state.categories.filter((item) => item !== category)
       : [...state.categories, category];
     if (categories.length > 5) return;
-    dispatch({ type: 'categories', categories });
+    dispatch({ type: 'setCategories', payload: categories });
   };
 
   const uploadVideo = () => {
@@ -106,19 +67,19 @@ function DreamConstructor(props) {
           type: state.type,
         });
       })
-      .then(dispatch({ type: 'stepUp' }));
+      .then(() => dispatch({ type: 'stepUp' }));
   };
 
   const onClose = () => {
     props.onClose();
-    dispatch({ type: 'reset', payload: initialState });
+    dispatch({ type: 'reset' });
   };
 
   return (
     <Window title={title()} open={props.open} onClose={onClose}>
       <form action="#" name="form" onSubmit={onSubmit}>
         {state.step === 1 && (
-          <DreamType onChangeType={onChangeType} />
+          <DreamType dispatch={dispatch} />
         )}
         {state.step === 2 && (
           <DreamCategory
@@ -130,26 +91,22 @@ function DreamConstructor(props) {
         {state.step === 3 && state.type === 'text' && (
           <DreamMessage
             onClickNextStep={() => dispatch({ type: 'stepUp' })}
-            onChangeText={(text) => dispatch({ type: 'text', text })}
+            onChangeText={(text) => dispatch({ type: 'setText', payload: text })}
           />
         )}
         {state.step === 3 && state.type === 'video' && (
           <DreamVideo
-            onClickNextStep={onRecordVideo}
+            dispatch={dispatch}
             open={props.open}
           />
         )}
         {state.step === 4 && (
-          <DreamForm
-            onChangeName={(name) => dispatch({ type: 'name', name })}
-            onChangeEmail={(email) => dispatch({ type: 'email', email })}
-            onChangeCountry={(country) => dispatch({ type: 'country', country })}
-          />
+          <DreamForm dispatch={dispatch} />
         )}
         {state.step === 5 && (
           <DreamFinished
             onClose={props.onClose}
-            resetSteps={() => dispatch({ type: 'reset', payload: initialState })}
+            resetSteps={() => dispatch({ type: 'reset' })}
           />
         )}
       </form>
