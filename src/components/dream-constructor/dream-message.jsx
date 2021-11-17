@@ -19,7 +19,7 @@ function DreamMessage(props) {
   const onClickNextStep = () => {
     try {
       validate();
-      props.onClickNextStep(text);
+      props.dispatch({ type: 'stepUp' });
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error.message);
@@ -30,7 +30,7 @@ function DreamMessage(props) {
     const newText = event.target.value;
     if (newText.length > 140) return;
     setText(newText);
-    props.onChangeText(newText);
+    props.dispatch({ type: 'setText', payload: newText });
   };
 
   return (
@@ -60,8 +60,7 @@ function DreamMessage(props) {
 }
 
 DreamMessage.propTypes = {
-  onClickNextStep: PropTypes.func.isRequired,
-  onChangeText: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default DreamMessage;

@@ -83,15 +83,14 @@ function DreamConstructor(props) {
         )}
         {state.step === 2 && (
           <DreamCategory
-            selectedCategories={state.categories}
             onToggleCategory={toggleCategory}
-            onClickNextStep={() => dispatch({ type: 'stepUp' })}
+            dispatch={dispatch}
+            state={state}
           />
         )}
         {state.step === 3 && state.type === 'text' && (
           <DreamMessage
-            onClickNextStep={() => dispatch({ type: 'stepUp' })}
-            onChangeText={(text) => dispatch({ type: 'setText', payload: text })}
+            dispatch={dispatch}
           />
         )}
         {state.step === 3 && state.type === 'video' && (
@@ -106,7 +105,7 @@ function DreamConstructor(props) {
         {state.step === 5 && (
           <DreamFinished
             onClose={props.onClose}
-            resetSteps={() => dispatch({ type: 'reset' })}
+            dispatch={dispatch}
           />
         )}
       </form>
