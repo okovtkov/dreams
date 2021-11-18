@@ -6,6 +6,7 @@ import Title from '../title/title';
 import TextField from '../text-field/text-field';
 import Button from '../button/button';
 import Select from '../select/select';
+import { actions } from './reducer';
 
 function DreamForm(props) {
   const [agree, setAgree] = useState(false);
@@ -22,16 +23,21 @@ function DreamForm(props) {
         type="text"
         name="name"
         required
-        onChangeValue={props.onChangeName}
+        onChangeValue={(name) => props.dispatch(actions.setName(name))}
       />
       <TextField
         title="Your Email (not displayed)"
         type="email"
         name="email"
         required
-        onChangeValue={props.onChangeEmail}
+        onChangeValue={(email) => props.dispatch(actions.setEmail(email))}
       />
-      <Select title="Country" name="country" required onChangeValue={props.onChangeCountry} />
+      <Select
+        title="Country"
+        name="country"
+        required
+        onChangeValue={(country) => props.dispatch(actions.setCountry(country))}
+      />
       <label className={css.privacyPolicy}>
         <div
           className={classNames(css.checkbox, {
@@ -55,9 +61,7 @@ function DreamForm(props) {
 }
 
 DreamForm.propTypes = {
-  onChangeName: PropTypes.func.isRequired,
-  onChangeEmail: PropTypes.func.isRequired,
-  onChangeCountry: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default DreamForm;

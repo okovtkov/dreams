@@ -149,8 +149,7 @@ function DreamCategories(props) {
 }
 
 const categoryType = PropTypes.shape({
-  // eslint-disable-next-line react/forbid-prop-types
-  image: PropTypes.object.isRequired,
+  image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   id: PropTypes.number,
   color: PropTypes.string,
