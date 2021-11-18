@@ -7,7 +7,7 @@ import Button from '../button/button';
 function DreamFinished(props) {
   const onClose = () => {
     props.onClose();
-    props.resetSteps();
+    props.dispatch({ type: 'reset' });
   };
 
   return (

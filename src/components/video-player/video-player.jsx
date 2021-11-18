@@ -1,7 +1,9 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/media-has-caption */
 import classNames from 'classnames';
-import React, { useState, useCallback, useRef } from 'react';
+import React, {
+  useState, useCallback, useRef, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import css from './video-player.module.scss';
 import Button from '../button/button';
@@ -21,7 +23,12 @@ function VideoPlayer(props) {
 
     streaming.getTracks().forEach((track) => track.stop());
     setPlayerState('stoped');
-  }, [streaming, props.open]);
+  }, [streaming]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (streaming) return stop;
+  }, [streaming]);
 
   const timer = () => {
     setSeconds((old) => old + 1);

@@ -117,7 +117,7 @@ export default function DreamReview(props) {
                 ref={link}
                 className={css.input}
                 type="text"
-                value={`localhost:3000/dream/${dream.id}`}
+                value={`https://vasilich99.github.io/dreams/${dream.id}`}
                 disabled
               />
               <button className={css.shareButton} type="button" onClick={() => copyText()}>

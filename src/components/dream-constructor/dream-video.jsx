@@ -4,6 +4,7 @@ import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import VideoPlayer from '../video-player/video-player';
 import Button from '../button/button';
+import { actions } from './reducer';
 
 function DreamVideo(props) {
   const [video, setVideo] = useState(null);
@@ -11,6 +12,11 @@ function DreamVideo(props) {
   const onStop = (recordedChunks) => {
     const recorded = new Blob(recordedChunks, { type: 'video/webm' });
     setVideo(recorded);
+  };
+
+  const onClickNextStep = (recorded) => {
+    props.dispatch(actions.setVideo(recorded));
+    props.dispatch(actions.stepUp());
   };
 
   return (
@@ -25,9 +31,8 @@ function DreamVideo(props) {
           video={video}
           setVideo={(recorded) => setVideo(recorded)}
           onStop={onStop}
-          open={props.open}
         >
-          <Button onClick={() => props.onClickNextStep(video)}>Next step</Button>
+          <Button onClick={() => onClickNextStep(video)}>Next step</Button>
         </VideoPlayer>
       </div>
       <label className={css.upload}>
@@ -39,7 +44,7 @@ function DreamVideo(props) {
 }
 
 DreamVideo.propTypes = {
-  onClickNextStep: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default DreamVideo;

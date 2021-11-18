@@ -4,16 +4,17 @@ import css from './dream-constructor.module.scss';
 import Button from '../button/button';
 import Title from '../title/title';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
+import { actions } from './reducer';
 
 function DreamCategory(props) {
   const validate = () => {
-    if (props.selectedCategories.length === 0) throw new Error('Please, select your 1-5 categories');
+    if (props.state.categories.length === 0) throw new Error('Please, select your 1-5 categories');
   };
 
   const onClickNextStep = () => {
     try {
       validate();
-      props.onClickNextStep();
+      props.dispatch(actions.stepUp());
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error.message);
@@ -28,8 +29,8 @@ function DreamCategory(props) {
       </p>
       <h3>SELECT YOUR 1-5 CATEGORIES</h3>
       <DreamCategories
-        selectedCategories={props.selectedCategories}
-        onToggleCategory={props.onToggleCategory}
+        selectedCategories={props.state.categories}
+        onToggleCategory={(category) => props.dispatch(actions.toggleCategory(category))}
         mode="large"
         canSelect
         categories={categories}
@@ -49,10 +50,21 @@ const categoryType = PropTypes.shape({
   color: PropTypes.string,
 });
 
+const stateType = PropTypes.shape({
+  categories: PropTypes.arrayOf(categoryType),
+  step: PropTypes.number,
+  type: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  video: PropTypes.object,
+  text: PropTypes.string,
+  name: PropTypes.string,
+  email: PropTypes.string,
+  country: PropTypes.string,
+});
+
 DreamCategory.propTypes = {
-  selectedCategories: PropTypes.arrayOf(categoryType).isRequired,
-  onClickNextStep: PropTypes.func.isRequired,
-  onToggleCategory: PropTypes.func.isRequired,
+  state: stateType,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default DreamCategory;
