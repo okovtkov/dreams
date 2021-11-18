@@ -13,7 +13,7 @@ import DreamMessage from './dream-message';
 import DreamVideo from './dream-video';
 import DreamForm from './dream-form';
 import DreamFinished from './dream-finished';
-import { reducer, initialState } from './reducer';
+import { reducer, initialState, actions } from './reducer';
 
 function DreamConstructor(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -26,19 +26,11 @@ function DreamConstructor(props) {
         className={classNames(css.title, {
           [css.titleWithPrev]: state.step > 1,
         })}
-        onClick={() => dispatch({ type: 'stepDown' })}
+        onClick={() => dispatch(actions.stepDown())}
       >
         {titleText}
       </button>
     );
-  };
-
-  const toggleCategory = (category) => {
-    const categories = state.categories.includes(category)
-      ? state.categories.filter((item) => item !== category)
-      : [...state.categories, category];
-    if (categories.length > 5) return;
-    dispatch({ type: 'setCategories', payload: categories });
   };
 
   const uploadVideo = () => {
@@ -67,47 +59,23 @@ function DreamConstructor(props) {
           type: state.type,
         });
       })
-      .then(() => dispatch({ type: 'stepUp' }));
+      .then(() => dispatch(actions.stepUp()));
   };
 
   const onClose = () => {
     props.onClose();
-    dispatch({ type: 'reset' });
+    dispatch(actions.reset());
   };
 
   return (
     <Window title={title()} open={props.open} onClose={onClose}>
       <form action="#" name="form" onSubmit={onSubmit}>
-        {state.step === 1 && (
-          <DreamType dispatch={dispatch} />
-        )}
-        {state.step === 2 && (
-          <DreamCategory
-            onToggleCategory={toggleCategory}
-            dispatch={dispatch}
-            state={state}
-          />
-        )}
-        {state.step === 3 && state.type === 'text' && (
-          <DreamMessage
-            dispatch={dispatch}
-          />
-        )}
-        {state.step === 3 && state.type === 'video' && (
-          <DreamVideo
-            dispatch={dispatch}
-            open={props.open}
-          />
-        )}
-        {state.step === 4 && (
-          <DreamForm dispatch={dispatch} />
-        )}
-        {state.step === 5 && (
-          <DreamFinished
-            onClose={props.onClose}
-            dispatch={dispatch}
-          />
-        )}
+        {state.step === 1 && <DreamType dispatch={dispatch} />}
+        {state.step === 2 && <DreamCategory dispatch={dispatch} state={state} />}
+        {state.step === 3 && state.type === 'text' && <DreamMessage dispatch={dispatch} />}
+        {state.step === 3 && state.type === 'video' && <DreamVideo dispatch={dispatch} />}
+        {state.step === 4 && <DreamForm dispatch={dispatch} />}
+        {state.step === 5 && <DreamFinished onClose={props.onClose} dispatch={dispatch} />}
       </form>
     </Window>
   );

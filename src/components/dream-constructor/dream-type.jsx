@@ -4,11 +4,12 @@ import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import IconVideo from '../svg-icon/icons/icon-video';
 import IconMessage from '../svg-icon/icons/icon-message';
+import { actions } from './reducer';
 
 function DreamType(props) {
   const changeType = (newType) => {
-    props.dispatch({ type: 'setType', payload: newType });
-    props.dispatch({ type: 'stepUp' });
+    props.dispatch(actions.setType(newType));
+    props.dispatch(actions.stepUp());
   };
 
   return (

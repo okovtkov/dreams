@@ -4,6 +4,7 @@ import css from './dream-constructor.module.scss';
 import Button from '../button/button';
 import Title from '../title/title';
 import DreamCategories, { categories } from '../dream-categories/dream-categories';
+import { actions } from './reducer';
 
 function DreamCategory(props) {
   const validate = () => {
@@ -13,7 +14,7 @@ function DreamCategory(props) {
   const onClickNextStep = () => {
     try {
       validate();
-      props.dispatch({ type: 'stepUp' });
+      props.dispatch(actions.stepUp());
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error.message);
@@ -29,7 +30,7 @@ function DreamCategory(props) {
       <h3>SELECT YOUR 1-5 CATEGORIES</h3>
       <DreamCategories
         selectedCategories={props.state.categories}
-        onToggleCategory={props.onToggleCategory}
+        onToggleCategory={(category) => props.dispatch(actions.toggleCategory(category))}
         mode="large"
         canSelect
         categories={categories}
@@ -62,10 +63,8 @@ const stateType = PropTypes.shape({
 });
 
 DreamCategory.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  state: PropTypes.object(stateType),
+  state: stateType,
   dispatch: PropTypes.func.isRequired,
-  onToggleCategory: PropTypes.func.isRequired,
 };
 
 export default DreamCategory;

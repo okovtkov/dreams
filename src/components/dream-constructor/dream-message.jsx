@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import css from './dream-constructor.module.scss';
 import Title from '../title/title';
 import Button from '../button/button';
+import { actions } from './reducer';
 
 function DreamMessage(props) {
   const [text, setText] = useState('');
@@ -19,7 +20,7 @@ function DreamMessage(props) {
   const onClickNextStep = () => {
     try {
       validate();
-      props.dispatch({ type: 'stepUp' });
+      props.dispatch(actions.stepUp());
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error.message);
@@ -30,7 +31,7 @@ function DreamMessage(props) {
     const newText = event.target.value;
     if (newText.length > 140) return;
     setText(newText);
-    props.dispatch({ type: 'setText', payload: newText });
+    props.dispatch(actions.setText(newText));
   };
 
   return (
