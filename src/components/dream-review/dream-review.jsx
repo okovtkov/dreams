@@ -6,34 +6,27 @@ import React, {
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import dreams from '../../api/dreams';
-import { categories } from '../dream-categories/dream-categories';
+import { categories } from '../dream-categories/categories';
 import css from './dream-review.module.scss';
 import IconShareLink from '../svg-icon/icons/icon-share-link';
 import IconLike from '../svg-icon/icons/icon-like';
 
 export default function DreamReview(props) {
   const [likeState, setLikeState] = useState(false);
-  const [dream, setDream] = useState({
-    html: '',
-    name: '',
-    country: '',
-    categories: [],
-    text: '',
-    type: '',
-    id: '',
-  });
+  const [dream, setDream] = useState(null);
+  const [loading, setLoading] = useState(true);
   const link = useRef();
 
-  const id = useMemo(() => (dream.type === 'video' ? new URL(dream.text).pathname.slice(1) : ''), [dream]);
+  const id = useMemo(() => (dream?.type === 'video' ? new URL(dream.text).pathname.slice(1) : ''), [dream]);
 
   const copyText = () => {
     navigator.clipboard.writeText(link.current.value);
   };
 
   useEffect(() => {
-    dreams.get().then((dreamsList) => {
-      const result = dreamsList.find((item) => item.id === props.dreamId);
+    dreams.getById(props.dreamId).then((result) => {
       setDream(result);
+      setLoading(false);
     });
   }, [props.dreamId]);
 
@@ -42,7 +35,7 @@ export default function DreamReview(props) {
     props.onClose();
   };
 
-  return dream?.id ? (
+  return !loading && (
     <section className={css.dreamReview}>
       <div className={css.wrapper}>
         {dream.type === 'video' ? (
@@ -117,7 +110,7 @@ export default function DreamReview(props) {
                 ref={link}
                 className={css.input}
                 type="text"
-                value={`https://vasilich99.github.io/dreams/${dream.id}`}
+                value={`${document.location.href}`}
                 disabled
               />
               <button className={css.shareButton} type="button" onClick={() => copyText()}>
@@ -129,5 +122,5 @@ export default function DreamReview(props) {
         </div>
       </div>
     </section>
-  ) : null;
+  );
 }

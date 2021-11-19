@@ -2,12 +2,15 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import css from './dream-preview.module.scss';
-import DreamCategories, { categories } from '../dream-categories/dream-categories';
+import DreamCategories from '../dream-categories/dream-categories';
+import { categories } from '../dream-categories/categories';
 
 export default function DreamPreview(props) {
   const clickAtDreamHandler = (event, dream) => {
-    event.preventDefault();
-    props.onSelectDream(dream);
+    if (event.code === 'Space' || event.code === 'Enter') {
+      event.preventDefault();
+      props.onSelectDream(dream);
+    }
   };
 
   const getCategoriesByIds = (ids) => ids.map((id) => {
