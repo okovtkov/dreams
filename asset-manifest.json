@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/dreams/static/css/main.491c1562.chunk.css",
-    "main.js": "/dreams/static/js/main.32f7882d.chunk.js",
-    "main.js.map": "/dreams/static/js/main.32f7882d.chunk.js.map",
+    "main.css": "/dreams/static/css/main.7a27a411.chunk.css",
+    "main.js": "/dreams/static/js/main.b0b28cc5.chunk.js",
+    "main.js.map": "/dreams/static/js/main.b0b28cc5.chunk.js.map",
     "runtime-main.js": "/dreams/static/js/runtime-main.f98d2e75.js",
     "runtime-main.js.map": "/dreams/static/js/runtime-main.f98d2e75.js.map",
-    "static/js/2.22e271bc.chunk.js": "/dreams/static/js/2.22e271bc.chunk.js",
-    "static/js/2.22e271bc.chunk.js.map": "/dreams/static/js/2.22e271bc.chunk.js.map",
+    "static/js/2.fec61761.chunk.js": "/dreams/static/js/2.fec61761.chunk.js",
+    "static/js/2.fec61761.chunk.js.map": "/dreams/static/js/2.fec61761.chunk.js.map",
     "index.html": "/dreams/index.html",
-    "static/css/main.491c1562.chunk.css.map": "/dreams/static/css/main.491c1562.chunk.css.map",
-    "static/js/2.22e271bc.chunk.js.LICENSE.txt": "/dreams/static/js/2.22e271bc.chunk.js.LICENSE.txt",
+    "static/css/main.7a27a411.chunk.css.map": "/dreams/static/css/main.7a27a411.chunk.css.map",
+    "static/js/2.fec61761.chunk.js.LICENSE.txt": "/dreams/static/js/2.fec61761.chunk.js.LICENSE.txt",
     "static/media/planet.2e1f21c8.png": "/dreams/static/media/planet.2e1f21c8.png",
     "static/media/planet_mobile.8dcd020c.png": "/dreams/static/media/planet_mobile.8dcd020c.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f98d2e75.js",
-    "static/js/2.22e271bc.chunk.js",
-    "static/css/main.491c1562.chunk.css",
-    "static/js/main.32f7882d.chunk.js"
+    "static/js/2.fec61761.chunk.js",
+    "static/css/main.7a27a411.chunk.css",
+    "static/js/main.b0b28cc5.chunk.js"
   ]
 }
