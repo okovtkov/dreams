@@ -22,10 +22,9 @@ export default function DreamsList() {
   }, [activeDreamId]);
 
   useEffect(() => {
-    dreams.get().then((result) => {
-      setDreamsList(result);
-      setLoading(false);
-    });
+    dreams.get()
+      .then((result) => setDreamsList(result))
+      .finally(() => setLoading(false));
   }, []);
 
   return !loading ? (

@@ -5,6 +5,7 @@ import Button from '../button/button';
 import Title from '../title/title';
 import DreamCategories from '../dream-categories/dream-categories';
 import { actions } from './reducer';
+import { categories } from '../dream-categories/categories';
 
 function DreamCategory(props) {
   const validate = () => {
@@ -29,6 +30,7 @@ function DreamCategory(props) {
       </p>
       <h3>SELECT YOUR 1-5 CATEGORIES</h3>
       <DreamCategories
+        categories={categories}
         selectedCategories={props.state.categories}
         onToggleCategory={(category) => props.dispatch(actions.toggleCategory(category))}
         mode="large"

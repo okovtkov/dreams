@@ -20,16 +20,13 @@ const dreams = {
       });
   },
   getById(docId) {
-    if (docId) {
-      const ref = doc(dreamsCollection, docId);
-      const result = getDoc(ref).then((document) => {
-        const { id } = document;
-        const { name, email, country, categories, text, type } = document.data();
-        return { id, name, email, country, categories, text, type };
-      });
-      return result;
-    }
-    return Promise.resolve({});
+    if (!docId) throw new Error('ID не указан');
+    const ref = doc(dreamsCollection, docId);
+    return getDoc(ref).then((document) => {
+      const { id } = document;
+      const { name, email, country, categories, text, type } = document.data();
+      return { id, name, email, country, categories, text, type };
+    });
   },
 };
 

@@ -13,7 +13,7 @@ function DreamCategories(props) {
           key={category.title}
           className={classNames(css[`item_${props.mode}`], {
             [css.item_checked]:
-              (props.selectedCategories && props.selectedCategories.includes(category)),
+              (props.selectedCategories && props.selectedCategories?.includes(category)),
           })}
           style={{ backgroundColor: category.color }}
         >
