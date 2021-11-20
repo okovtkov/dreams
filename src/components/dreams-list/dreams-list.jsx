@@ -11,6 +11,7 @@ export default function DreamsList() {
   const params = useParams();
   const [dreamsList, setDreamsList] = useState([]);
   const [activeDreamId, setActiveDreamId] = useState(params.id);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (activeDreamId) {
@@ -21,10 +22,13 @@ export default function DreamsList() {
   }, [activeDreamId]);
 
   useEffect(() => {
-    dreams.get().then((result) => setDreamsList(result));
+    dreams.get().then((result) => {
+      setDreamsList(result);
+      setLoading(false);
+    });
   }, []);
 
-  return dreamsList.length > 0 ? (
+  return !loading ? (
     <>
       {activeDreamId && (
         <DreamReview onClose={() => setActiveDreamId(null)} dreamId={activeDreamId} />

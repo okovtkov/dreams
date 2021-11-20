@@ -3,7 +3,7 @@ import React from 'react';
 import css from './dream-constructor.module.scss';
 import Button from '../button/button';
 import Title from '../title/title';
-import DreamCategories, { categories } from '../dream-categories/dream-categories';
+import DreamCategories from '../dream-categories/dream-categories';
 import { actions } from './reducer';
 
 function DreamCategory(props) {
@@ -33,7 +33,6 @@ function DreamCategory(props) {
         onToggleCategory={(category) => props.dispatch(actions.toggleCategory(category))}
         mode="large"
         canSelect
-        categories={categories}
       />
       <Button onClick={onClickNextStep}>
         Next step
