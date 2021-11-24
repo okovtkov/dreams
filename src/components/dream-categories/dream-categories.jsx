@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import React from 'react';
 import css from './dream-categories.module.scss';
 
@@ -20,7 +19,7 @@ function DreamCategories(props) {
         >
           {props.mode === 'large' && (
             <CategoryContainer>
-              <Image
+              <img
                 src={category.image}
                 alt={category.title}
                 className={css.image}
