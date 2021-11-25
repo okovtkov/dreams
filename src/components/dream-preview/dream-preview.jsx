@@ -7,7 +7,7 @@ import { categories } from '../dream-categories/categories';
 
 export default function DreamPreview(props) {
   const clickAtDreamHandler = (event, dream) => {
-    if (event.code === 'Space' || event.code === 'Enter') {
+    if (event.code === 'Space' || event.code === 'Enter' || event.type === 'click') {
       event.preventDefault();
       props.onSelectDream(dream);
     }

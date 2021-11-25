@@ -31,8 +31,10 @@ export default function DreamReview(props) {
   }, [props.dreamId]);
 
   const closeHandler = (event) => {
-    event.preventDefault();
-    props.onClose();
+    if (event.code === 'Space' || event.code === 'Enter' || event.type === 'click') {
+      event.preventDefault();
+      props.onClose();
+    }
   };
 
   return !loading && (

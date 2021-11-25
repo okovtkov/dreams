@@ -15,7 +15,7 @@ export default function DreamsList() {
 
   useEffect(() => {
     if (activeDreamId) {
-      history.pushState(null, document.title, `/${activeDreamId}`);
+      history.pushState(null, document.title, `/dreams/${activeDreamId}`);
     } else if (document.location.pathname !== '/dreams') {
       history.pushState(null, document.title, '/dreams');
     }
